@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `sp` ADD COLUMN `title` VARCHAR(191) NULL;

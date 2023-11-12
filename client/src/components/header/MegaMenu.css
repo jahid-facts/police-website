@@ -1,0 +1,62 @@
+.mega__menu__section nav .mega__menu {
+    list-style-type: none;
+    padding-inline-start: 0;
+    margin-bottom: 0.3rem !important;
+  }
+  
+
+
+.mega__menu__section .menu-item {
+    position: relative;
+    padding: 7px;
+}
+
+.mega__menu__section .menu-item .menu__link {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+.mega__menu__section .menu-item:hover {
+    color: #333;
+    background-color: #f0f0f0;
+}
+.mega__menu__section .menu-item .menu__link:not(:only-child) {
+    padding-right: 22px;
+}
+.mega__menu__section .menu-item .menu__link:not(:only-child)::after {
+    position: absolute;
+    right: 8px;
+    content: "\f0d7";
+    float: right;
+    border: none;
+    font-family: 'FontAwesome';
+}
+
+.mega__menu__section .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    /* width: 900px; */
+    font-size: 12px;
+    z-index: 200;
+}
+
+.mega__menu__section .menu-item:hover .sub-menu {
+    display: block;
+}
+
+.mega__menu__section .sub-menu .nav__link {
+    display: block;
+    padding: 5px 2px;
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+}
+.mega__menu__section .sub-menu .nav__link:hover {
+    color: #333;
+    background-color: #f0f0f0;
+}

@@ -1,0 +1,619 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Latest_News {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.Text
+  file      String?
+  content   String?  @db.LongText
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Top_Slider {
+  id    Int    @id @default(autoincrement())
+  date  String
+  image String @db.Text
+}
+
+model Top_Banner {
+  id    Int    @id @default(autoincrement())
+  date  String
+  image String @db.Text
+}
+
+model Bottom_News {
+  id          Int    @id @default(autoincrement())
+  date        String
+  description String @db.Text
+  link        String @db.Text
+}
+
+model Recent_Activity {
+  id        Int      @id @default(autoincrement())
+  image     String
+  heading   String   @db.Text
+  content   String   @db.LongText
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Activity_Slider {
+  id        Int      @id @default(autoincrement())
+  image     String
+  title     String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Work_Document_Section {
+  id        Int      @id @default(autoincrement())
+  title     String
+  image     String
+  works     Works[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Works {
+  id            Int                   @id @default(autoincrement())
+  title         String
+  workSectionId Int
+  workSection   Work_Document_Section @relation(fields: [workSectionId], references: [id], onDelete: Cascade)
+  content       String                @db.LongText
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+}
+
+model Image_Gallery {
+  id             Int      @id @default(autoincrement())
+  title          String
+  mainImage      String
+  multipleImages String?  @db.Text
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Video_Gallery {
+  id        Int      @id @default(autoincrement())
+  image     String
+  title     String   @db.Text
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Footer_Heading {
+  id         Int           @id @default(autoincrement())
+  title      String
+  footerData Footer_Data[]
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+}
+
+model Footer_Data {
+  id        Int            @id @default(autoincrement())
+  title     String
+  link      String?
+  headingId Int
+  heading   Footer_Heading @relation(fields: [headingId], references: [id], onDelete: Cascade)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+}
+
+// zilla poilice
+model Zilla_Police_Pages {
+  id        Int                      @id @default(autoincrement())
+  title     String
+  content   String?                  @db.LongText
+  subPages  Zilla_Police_Sub_Pages[]
+  index     Int?
+  status    String?
+  createdAt DateTime                 @default(now())
+  updatedAt DateTime                 @updatedAt
+}
+
+model Zilla_Police_Sub_Pages {
+  id        Int                @id @default(autoincrement())
+  title     String
+  pageId    Int
+  content   String?            @db.LongText
+  index     Int?
+  status    String?
+  page      Zilla_Police_Pages @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+}
+
+// zilla poilice
+// Administration
+model administration_Pages {
+  id        Int                        @id @default(autoincrement())
+  title     String
+  index     Int?
+  status    String?
+  content   String?                    @db.LongText
+  subPages  administration_Sub_Pages[]
+  exSp      ExSp[]
+  createdAt DateTime                   @default(now())
+  updatedAt DateTime                   @updatedAt
+}
+
+model administration_Sub_Pages {
+  id        Int                  @id @default(autoincrement())
+  title     String
+  pageId    Int
+  index     Int?
+  status    String?
+  content   String?              @db.LongText
+  page      administration_Pages @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+}
+
+model Employees {
+  id          Int      @id @default(autoincrement())
+  name        String
+  mobile      String
+  designation String?
+  phone       String?
+  image       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Officers {
+  id          Int      @id @default(autoincrement())
+  name        String
+  mobile      String
+  designation String?
+  phone       String?
+  image       String?
+  bcs_batch   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ExSp {
+  id            Int                  @id @default(autoincrement())
+  name          String
+  designationId Int
+  image         String?
+  title         String?
+  from_date     String?
+  to_date       String?
+  page          administration_Pages @relation(fields: [designationId], references: [id], onDelete: Cascade)
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+}
+
+model Ex_Police_Super {
+  id        Int      @id @default(autoincrement())
+  name      String
+  image     String?
+  title     String?
+  from_date String?
+  to_date   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Administration
+// Units 
+model Units {
+  id        Int             @id @default(autoincrement())
+  title     String
+  sub_units Sub_Units[]
+  forces    Unit_Force[]
+  ex_forces Ex_Unit_Force[]
+  index     Int?
+  content   String?         @db.LongText
+  status    String?
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model Sub_Units {
+  id        Int             @id @default(autoincrement())
+  title     String
+  unitId    Int
+  index     Int?
+  content   String?         @db.LongText
+  status    String?
+  unit      Units           @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  forces    Unit_Force[]
+  ex_forces Ex_Unit_Force[]
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model Unit_Force {
+  id                  Int        @id @default(autoincrement())
+  name                String
+  designation         String?
+  current_designation String?
+  mobile              String?
+  phone               String?
+  bcs_batch           String?
+  image               String?
+  unitId              Int
+  unit                Units      @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  sub_units           Sub_Units? @relation(fields: [sub_unitId], references: [id], onDelete: Cascade)
+  sub_unitId          Int?
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+}
+
+model Ex_Unit_Force {
+  id          Int        @id @default(autoincrement())
+  name        String
+  designation String?
+  from_date   String?
+  to_date     String?
+  image       String?
+  unitId      Int
+  unit        Units      @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  sub_units   Sub_Units? @relation(fields: [sub_unitId], references: [id], onDelete: Cascade)
+  sub_unitId  Int?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+// Units 
+// Activities
+model Activities_Pages {
+  id        Int                    @id @default(autoincrement())
+  title     String
+  content   String?                @db.LongText
+  index     Int?
+  status    String?
+  subPages  Activities_Sub_Pages[]
+  createdAt DateTime               @default(now())
+  updatedAt DateTime               @updatedAt
+}
+
+model Activities_Sub_Pages {
+  id        Int              @id @default(autoincrement())
+  title     String
+  pageId    Int
+  index     Int?
+  status    String?
+  content   String?          @db.LongText
+  page      Activities_Pages @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+}
+
+// Activites
+
+// Service
+model Service_Pages {
+  id        Int                 @id @default(autoincrement())
+  title     String
+  index     Int?
+  status    String?
+  content   String?             @db.LongText
+  subPages  Service_Sub_Pages[]
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+}
+
+model Service_Sub_Pages {
+  id        Int           @id @default(autoincrement())
+  title     String
+  pageId    Int
+  index     Int?
+  status    String?
+  content   String?       @db.LongText
+  page      Service_Pages @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+// Service
+
+// notice 
+
+model Notice_Categories {
+  id        Int                      @id @default(autoincrement())
+  title     String
+  index     Int?
+  status    String?
+  notices   NoticeCategoryRelation[] // Change to a relation to the junction table
+  createdAt DateTime                 @default(now())
+  updatedAt DateTime                 @updatedAt
+}
+
+model NoticeCategoryRelation {
+  id         Int               @id @default(autoincrement())
+  noticeId   Int
+  categoryId Int
+  notice     Notices           @relation(fields: [noticeId], references: [id], onDelete: Cascade)
+  category   Notice_Categories @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([noticeId, categoryId])
+}
+
+model Notices {
+  id                Int                      @id @default(autoincrement())
+  title             String
+  content           String?                  @db.LongText
+  file              String?
+  index             Int?
+  published_in_news Boolean                  @default(false)
+  categories        NoticeCategoryRelation[] // Change to a relation to the junction table
+  createdAt         DateTime                 @default(now())
+  updatedAt         DateTime                 @updatedAt
+}
+
+// notice 
+
+// Bit policing
+model Bit_Police_Pages {
+  id        Int      @id @default(autoincrement())
+  title     String
+  index     Int?
+  status    String?
+  content   String?  @db.LongText
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Thana {
+  id           Int            @id @default(autoincrement())
+  title        String
+  index        Int?
+  status       String?
+  bit_officers Bit_Officers[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model Bit_Officers {
+  id              Int       @id @default(autoincrement())
+  thanaId         Int
+  thana           Thana     @relation(fields: [thanaId], references: [id], onDelete: Cascade)
+  bitNews         BitNews[]
+  name            String?
+  email           String?
+  image           String?
+  fax             String?
+  address         String?
+  index           Int?
+  status          String?
+  current_address String?
+  location        String?
+  mobile          String?
+  phone           String?
+  designation     String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model BitNews {
+  id        Int          @id @default(autoincrement())
+  officerId Int
+  officer   Bit_Officers @relation(fields: [officerId], references: [id], onDelete: Cascade)
+  content   String?      @db.LongText
+  title     String?
+  image     String?
+  index     Int?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+// Bit policing
+// Phone Directories
+model Directory_Categories {
+  id             Int                        @id @default(autoincrement())
+  title          String
+  index          Int?
+  categories     Directoris[]
+  sub_categories Directory_Sub_Categories[]
+  createdAt      DateTime                   @default(now())
+  updatedAt      DateTime                   @updatedAt
+}
+
+model Directory_Sub_Categories {
+  id          Int                  @id @default(autoincrement())
+  title       String
+  index       Int?
+  categoryId  Int
+  category    Directory_Categories @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  directories Directoris[]
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+}
+
+model Directoris {
+  id            Int                       @id @default(autoincrement())
+  categoryId    Int
+  category      Directory_Categories      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  subCategoryId Int?
+  subCategory   Directory_Sub_Categories? @relation(fields: [subCategoryId], references: [id], onDelete: Cascade)
+  name          String?
+  email         String?
+  image         String?
+  fax           String?
+  mobile        String?
+  phone         String?
+  designation   String?
+  index         Int?
+  createdAt     DateTime                  @default(now())
+  updatedAt     DateTime                  @updatedAt
+}
+
+// Phone Directories
+
+// Crime Maangement
+model Crime_Mangement {
+  id        Int      @id @default(autoincrement())
+  title     String
+  index     Int?
+  status    String?
+  content   String   @db.LongText
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Crime management
+// Sp
+model sp {
+  id          Int      @id @default(autoincrement())
+  name        String
+  title       String?
+  index       Int?
+  designation String?
+  image       String?
+  content     String?  @db.LongText
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Sp
+// Dig
+model dig {
+  id          Int      @id @default(autoincrement())
+  name        String
+  designation String?
+  image       String?
+  content     String?  @db.LongText
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Dig
+//Role
+model Role {
+  id               Int    @id @default(autoincrement())
+  users            User[]
+  home_page        String @db.LongText
+  work_section     String @db.LongText
+  footer_section   String @db.LongText
+  zilla_police     String @db.LongText
+  administration   String @db.LongText
+  units            String @db.LongText
+  activity         String @db.LongText
+  crime_management String @db.LongText
+  service          String @db.LongText
+  notice_board     String @db.LongText
+  bit_policing     String @db.LongText
+  phone_directory  String @db.LongText
+  user             String @db.LongText
+  role             String @unique
+}
+
+//Role
+// User
+model User {
+  id                 Int      @id @default(autoincrement())
+  name               String
+  email              String   @unique
+  phone              String?  @unique
+  password           String
+  role_id            Int
+  image              String?
+  role               Role     @relation(fields: [role_id], references: [id], onDelete: Cascade)
+  permissions_module String?  @db.LongText
+  permissions        String?  @db.LongText
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+// User
+
+// Reset Token
+model Reset_Token {
+  id              Int      @id @default(autoincrement())
+  email           String
+  token           String
+  expiration_time Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// Reset Token
+
+// Footer Branding
+model Footer_Branding {
+  id           Int      @id @default(autoincrement())
+  company      String?
+  facebook     String?
+  youtube      String?
+  whatsapp     String?
+  company_link String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model button_links {
+  id        Int      @id @default(autoincrement())
+  title     String
+  link      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Footer Branding
+// Vistor Counter
+model visitor_counter {
+  id         Int      @id @default(autoincrement())
+  visitor_no Int?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// Vistor Counter
+
+// Right Sidebar 
+model important_links {
+  id        Int      @id @default(autoincrement())
+  title     String
+  link      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model right_others {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String?  @db.LongText
+  image     String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Right Sidebar 
+
+//contact address 
+model contact_address {
+  id        Int      @id @default(autoincrement())
+  office    String?
+  phone     String?
+  fax       String?
+  email     String?
+  map       String?  @db.LongText
+  mobile    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// contact person 
+model contact_person {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  email     String?
+  index     Int?
+  others    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

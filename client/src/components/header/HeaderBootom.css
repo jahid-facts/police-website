@@ -1,0 +1,43 @@
+.txt__color {
+    color: #0D2C49;
+}
+
+.marquee__container {
+    position: relative;
+    width: 100%;
+    border: 2px solid #d0d3d5;
+}
+
+.marquee__txt {
+    margin-bottom: 0.3rem !important;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.marquee__news {
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    transform: translate(0%, -50%);
+    background: #d0d3d5;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.btn__marquee {
+    color: #0D2C49;
+    font-size: 15px;
+    padding: 4px 11px;
+    margin-bottom: 0.0rem !important;
+}
+
+.btn__marquee:hover {
+    color: #167bda;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+
+
+}

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `sp` ADD COLUMN `image` VARCHAR(191) NULL;
