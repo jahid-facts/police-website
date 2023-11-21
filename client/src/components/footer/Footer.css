@@ -1,8 +1,10 @@
 .ft__hr {
-    border: 3px solid #737674;
+    /* border: 3px solid #7f8481; */
+    border: 2px solid #5e615f;
 }
+
 .fb__hr {
-    border: 5px solid #737272;
+    border: 2px solid #ff9500
 }
 
 .header__footer {
@@ -19,22 +21,31 @@
 }
 
 .ft__link__txt {
+    font-size: 15px;
     line-height: 180%;
-    color:  #717374;
+    color: rgb(0, 114, 171);
 }
+
 .fb__link__txt {
     line-height: 165%;
-    color:  #717374;
+    color: #717374;
     padding: 0px 4px;
 }
-.fb__link__txt a {
-    color:  #717374;
+
+.h6, h6 {
+    font-size: 13px;
 }
+
+.fb__link__txt a {
+    color: #717374;
+}
+
 .fb__link__txt:hover {
     background: #23569A;
     color: #fff;
     padding: 0px 4px;
 }
+
 .fb__link__txt a:hover {
     color: #fff;
 }
@@ -42,15 +53,15 @@
 .link_footer {
     line-height: 180%;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .text__color {
-    color:  #717374;
+    color: #717374;
 }
 
 .social__text {
-    color:  #717374;
+    color: #717374;
 }
 
 .subscribe {
@@ -71,7 +82,7 @@
 
 .header_contact_us_footer {
     line-height: 180%;
-    color:  #717374;
+    color: #717374;
 }
 
 .contact_us_footer {
@@ -99,18 +110,20 @@
     /* text-align: center; */
     font-size: small;
     background: #e9edf1;
-    color:  #717374;
+    color: #717374;
     padding: 10px;
 
 }
 
 .ft__rt__arrow {
-    color:  #717374;
+    margin-top: 3px;
+    color: #9da4a7;
+    font-size: 9px;
 }
 
 .ft__txt {
     margin-bottom: 10px !important;
-    color:  #717374;
+    color: #717374;
 }
 
 .footer_social {
@@ -160,6 +173,7 @@
     background: #E60023;
     color: #fff;
 }
+
 .footer_social .pinterest:hover {
     background: #E60023;
     color: #fff;
@@ -229,21 +243,26 @@
     background: #E60023;
     color: #fff;
 }
+
 .ht-social .youtube:hover {
     background: #E60023;
     color: #fff;
 }
+
 .sit-map-container p {
     font-size: 13px;
     margin-bottom: 0.3rem;
 }
+
 .sit-map-container .inner {
     margin-left: 30px;
 }
+
 .sit-map-container a {
     text-decoration: none;
     color: #717374;
 }
+
 .footer-button-section .footer-button {
     display: inline-block;
     padding: 0px 18px;
@@ -256,15 +275,41 @@
     text-decoration: none;
     transition: all 0.3s ease;
 }
+
 .footer-button-section .footer-button:hover {
     background: #23579B;
     color: #FFF;
     border-color: #23579B;
     outline: 0;
 }
+
 .footer-button-section {
     border-bottom: 2px dotted #737272;
 }
+
+/* Add this style to your existing CSS or create a new CSS file */
+
+/* Add this style to your existing CSS or create a new CSS file */
+.link_footer :hover {
+    padding: 2px;
+    background-color: #C5D394;
+    
+    /* Change the background color on hover */
+    /* Add any other styles you want to apply on hover */
+}
+
+/* Optional: Add styles for the nested elements inside the link */
+.link_footer:hover i {
+    color: #776262;
+    /* Change the color of the icon on hover */
+}
+
+.link_footer:hover .ft__txt { 
+    /* background-color: #EBF5FB; */
+    color: #242526;
+    /* Change the color of the text on hover */
+}
+
 
 
 @media only screen and (max-width: 768px) {

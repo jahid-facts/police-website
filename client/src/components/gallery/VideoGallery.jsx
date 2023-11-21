@@ -39,7 +39,7 @@ const VideoGallery = () => {
     };
 
     return (
-        <div className="container  pt-2 mb-5">
+        <div className="container pt-2 mb-5">
             <div className="row g-3">
                 <div className="col-md-9">
                     <h6 className="rc__hd__txt">ভিডিও গ্যালারি</h6>

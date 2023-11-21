@@ -16,13 +16,13 @@ const Footer = () => {
     }, [])
     return (
         <>
-            <div className="pt-3">
+            <div className="pt-0" style={{background: '#f5f5f5'}}>
                 <hr className="ft__hr" />
                 <div className="p-3">
                     <div className="container">
                         <div className="row g-3">
                             {
-                                data.map((item, index) => <div key={index} className="col-md-3 pe-md-5">
+                                data.map((item, index) => <div key={index} className="col-md-3 pe-md-3">
                                     <h5 className="ft__link__txt mb-2">{item.title}</h5>
                                     <div className="footer_contact pt-2">
                                         <ul className="list-unstyled">
@@ -47,7 +47,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <hr className="fb__hr" />
+                <hr className="fb__hr m-0" />
                 <FooterBottom />
             </div>
 

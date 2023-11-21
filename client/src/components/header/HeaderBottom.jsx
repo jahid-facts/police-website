@@ -23,7 +23,7 @@ const HeaderBottom = () => {
 
     return (
         <div className="container pt-1 mb-1">
-            <div style={{minHeight:"30px"}} className="marquee__container">
+            <div style={{minHeight:"30px", width: "100%"}} className="marquee__container">
                 <Marquee
                     pauseOnHover={true}
                     speed={60}

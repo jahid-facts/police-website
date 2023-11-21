@@ -49,7 +49,7 @@ const HeaderTop = () => {
     return (
         <div className="ht__bg__color">
             <div className={`active1 ${show && 'hidden'}`}>
-                <div className="container">
+                <div className="container p-lg-0">
                     <div className="row d-flex justify-content-between align-items-center">
                         <div className="col-md-3">
                             <a href={data?.designation} className='text-decoration-none'><p className="ht__top__txt mb-2">{data?.name}</p></a>

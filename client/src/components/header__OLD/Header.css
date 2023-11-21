@@ -98,6 +98,7 @@
 /* Mobile Styles */
 @media only screen and (max-width: 768px) {
   .ht__nav nav ul {
+    /* flex-direction: column; */
     flex-direction: column;
   }
 

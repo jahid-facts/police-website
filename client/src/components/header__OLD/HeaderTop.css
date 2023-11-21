@@ -101,6 +101,7 @@
 
 
 .slider__carousel .slick-slider .slick-slide {
+  /* padding: 0px 9px; */
   padding: 0px 9px;
   align-items: center;
 }

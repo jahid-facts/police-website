@@ -13,11 +13,13 @@
 
 .mega__menu__section .menu-item .menu__link {
     text-decoration: none;
-    color: #333;
+    /* color: #333; */
+    color: #1c201e;
     font-size: 14px;
 }
 .mega__menu__section .menu-item:hover {
-    color: #333;
+    /* color: #333; */
+    color: #982626;
     background-color: #f0f0f0;
 }
 .mega__menu__section .menu-item .menu__link:not(:only-child) {

@@ -13,7 +13,7 @@ exports.register = async (req, res) => {
         name,
         email,
         password: hashedPassword,
-      
+
         role_id: Number(role_id)
       },
     });
@@ -126,11 +126,15 @@ exports.getSingleUser = async (req, res) => {
     });
     delete user.password;
     res.json(user)
+    // console.log(user)
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: error.message });
   }
 }
+
+
+
 exports.deleteUser = async (req, res) => {
   const user = await prisma.user.delete({
     where: {
@@ -234,7 +238,7 @@ exports.resetPassword = async (req, res) => {
   // Hash the new password
   const hashedNewPassword = await bcrypt.hash(newPassword, 10);
   // Update the user's password in the database
-  
+
   await prisma.user.update({
     where: { email: resetToken.email },
     data: {

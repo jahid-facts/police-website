@@ -7,6 +7,7 @@ import prevent_dengue_img from '../../assets/prevent_dengue_img.jpg';
 import list_icon from '../../assets/list_icon.png';
 import axios from 'axios';
 import imgUrl from '../../imgUrl';
+import "./LeftHomePage.css"
 
 const LeftHomePage = () => {
     const [digData, setDigData] = useState({});
@@ -144,7 +145,7 @@ const LeftHomePage = () => {
                             data-show-facepile="false">
                         </div> */}
                         <div className="fb__page">
-                            <iframe src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/Kdistrictpolice%2Ffacebook&tabs=timeline&width=270&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="253" height="500" style={{ border: "none", overflow: "hidden", }} scrolling="no" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                            <iframe src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/Kdistrictpolice%2Ffacebook&tabs=timeline&width=270&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="100%" height="500" style={{ border: "none", overflow: "hidden", }} scrolling="no" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                         </div>
                     </div>
                 </div>

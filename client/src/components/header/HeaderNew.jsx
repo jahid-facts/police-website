@@ -92,7 +92,8 @@ const HeaderNew = () => {
             name: 'গ্যালারী',
             link: '#',
             bg_color: '#609513',
-            color: '#8b8d8f',
+            // color: '#8b8d8f',
+            color: '#609513',
             padding: "0.4rem",
             display: "block",
             font_size: "14px",
@@ -132,7 +133,7 @@ const HeaderNew = () => {
             name: 'যোগাযোগ ও ঠিকানা',
             link: '#',
             bg_color: '#692E8F',
-            color: '#8b8d8f',
+            color: '#692E8F',
             padding: "0.4rem",
             display: "block",
             font_size: "14px",
@@ -203,7 +204,7 @@ const HeaderNew = () => {
     return (
         <div className="ht__navbar">
             <nav className="navbar navbar-expand-lg bg__body navbar-dark" >
-                <div className="container container-fluid ht__navbar__logo" >
+                <div className="container container-fluid ht__navbar__logo">
 
                     <button className="navbar-toggler text-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
@@ -220,7 +221,8 @@ const HeaderNew = () => {
                                 <Link to='#' className={`navbar-brand drop__division__hover  ${location.pathname === "" && "active-nav"}`} id="navbarDropdown13" role="button" data-bs-toggle="dropdown" aria-expanded="false"
                                     style={{
                                         // marginRight: item.margin_right,
-                                        color: "#8b8d8f",
+                                        // color: "#8b8d8f",
+                                        color: 'rgb(132, 21, 77)',
                                         fontSize: "14px",
                                         // backgroundColor: item.bg_color,
                                         padding: "0.4rem",
@@ -282,7 +284,8 @@ const HeaderNew = () => {
                                 <Link to='#' className={`navbar-brand drop__administration__hover ${location.pathname === "" && "active-nav"}`} id="navbarDropdown13" role="button" data-bs-toggle="dropdown" aria-expanded="false"
                                     style={{
                                         marginRight: "0px",
-                                        color: "#8b8d8f",
+                                        // color: "#8b8d8f",
+                                        color:'#c40a2a',
                                         fontSize: "14px",
                                         // backgroundColor: item.bg_color,
                                         padding: "0.4rem",
@@ -384,7 +387,8 @@ const HeaderNew = () => {
                                         // backgroundColor: item.bg_color,
                                         padding: "0.4rem",
                                         display: "block",
-                                        color: '#8b8d8f',
+                                        // color: '#8b8d8f',
+                                        color: '#098346'
                                     }}
                                 >
                                     <span>ইউনিট সমূহ<i className="fa-solid fa-angle-down pl-2"></i></span>
@@ -449,7 +453,8 @@ const HeaderNew = () => {
                                 <Link to='#' className={`navbar-brand drop__activities__hover  ${location.pathname === "" && "active-nav"}`} id="navbarDropdown13" role="button" data-bs-toggle="dropdown" aria-expanded="false"
                                     style={{
                                         marginRight: '0px',
-                                        color: '#8b8d8f',
+                                        // color: '#8b8d8f',
+                                        color: '#1399be',
                                         fontSize: '14px',
                                         // backgroundColor: item.bg_color,
                                         padding: "0.4rem",
@@ -512,7 +517,8 @@ const HeaderNew = () => {
                                 <Link to='#' className={`navbar-brand drop__services__hover ${location.pathname === "" && "active-nav"}`} id="navbarDropdown13" role="button" data-bs-toggle="dropdown" aria-expanded="false"
                                     style={{
                                         marginRight: "0px",
-                                        color: "#8b8d8f",
+                                        // color: "#8b8d8f",
+                                        color: '#EE9421',
                                         fontSize: "14px",
                                         // backgroundColor: item.bg_color,
                                         padding: "0.4rem",
@@ -575,7 +581,7 @@ const HeaderNew = () => {
                                 <Link to='#' className={`navbar-brand drop__crime__manage__hover ${location.pathname === "" && "active-nav"}`} id="navbarDropdown13" role="button" data-bs-toggle="dropdown" aria-expanded="false"
                                     style={{
                                         marginRight: "0px",
-                                        color: '#8b8d8f',
+                                        color: '#8768de',
                                         fontSize: '14px',
                                         // backgroundColor: item.bg_color,
                                         padding: "0.4rem",
@@ -619,7 +625,7 @@ const HeaderNew = () => {
                                 <Link to='#' className={`navbar-brand drop__notice__board__hover ${location.pathname === "" && "active-nav"}`} id="navbarDropdown13" role="button" data-bs-toggle="dropdown" aria-expanded="false"
                                     style={{
                                         marginRight: '0px',
-                                        color: '#8b8d8f',
+                                        color: '#F0849D',
                                         fontSize: '14px',
                                         // backgroundColor: item.bg_color,
                                         padding: '0.4rem',
@@ -710,7 +716,7 @@ const HeaderNew = () => {
                                 <Link to='#' className={`navbar-brand drop__bit__policing__hover ${location.pathname === "" && "active-nav"}`} id="navbarDropdown13" role="button" data-bs-toggle="dropdown" aria-expanded="false"
                                     style={{
                                         marginRight: '0px',
-                                        color: '#8b8d8f',
+                                        color: '#01DFD7',
                                         fontSize: '14px',
                                         // backgroundColor: item.bg_color,
                                         padding: '0.4rem',
@@ -774,6 +780,7 @@ const HeaderNew = () => {
                                                 style={{
                                                     marginRight: item.margin_right,
                                                     color: item.color,
+                                                    // color: "692E8F",
                                                     fontSize: item.font_size,
                                                     // backgroundColor: item.bg_color,
                                                     padding: item.padding,

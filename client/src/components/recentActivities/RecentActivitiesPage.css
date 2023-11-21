@@ -1,0 +1,7 @@
+.hover-effect:hover {
+    /* Define your hover effect styles here */
+    background-color: rgb(235, 201, 246);
+    box-shadow: 0 4px 8px rgba(11, 11, 11, 0.1);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}

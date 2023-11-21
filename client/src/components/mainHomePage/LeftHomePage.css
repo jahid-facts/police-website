@@ -1,0 +1,19 @@
+.fb__page-container {
+    width: 100%;
+    max-width: 100%;
+    /* Set a maximum width if needed */
+    /* margin: 0 auto; */
+    /* Center the container if desired */
+}
+
+.fb__page-container iframe {
+    width: 100%;
+    height: 500px;
+    /* Adjust the default height as needed */
+
+    @media (max-width: 767px) {
+        height: 300px;
+        width: 100%;
+        /* Adjust the height for smaller screens */
+    }
+}

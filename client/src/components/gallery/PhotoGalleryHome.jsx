@@ -114,11 +114,11 @@ const PhotoGalleryHome = () => {
 
     return (
         <>
-            <div className="pt-2">
+            <div className="pt-1">
                 <h6 className="rc__hd__txt">ফটো গ্যালারি</h6>
-                <div className="row g-3 gx-md-4 pt-2">
+                <div className="row g-0 gx-md-2 pt-0">
                     {
-                        galleryImages !== undefined && galleryImages.slice(0,6).map((item, id) => {
+                        galleryImages !== undefined && galleryImages.slice(0,6).reverse().map((item, id) => {
                             return (
                                 <div key={id} className="col-md-4">
                                     <div className="img__area">
@@ -127,7 +127,7 @@ const PhotoGalleryHome = () => {
                                         <div className="img__overlay" type="button" onClick={() => { openModalGallery(); setArr(item) }}>
                                             আরও ছবি দেখুন <br /><i className="ps-2 fa-solid fa-rocket"></i>
                                         </div>
-                                        <p className="img__title">{item.title}</p>
+                                        <p className="img__title mb-1">{item.title}</p>
                                     </div>
 
                                 </div>
@@ -163,7 +163,7 @@ const PhotoGalleryHome = () => {
                         </div>
                     </Modal>
                 </div>
-                <div className="row py-2">
+                <div className="row py-1">
                     <div className="col-12">
                         <div className="gallery__btn__area">
                             <Link to="/photo-gallery" className="gallery__btn">আরও ছবি</Link>

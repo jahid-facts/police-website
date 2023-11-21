@@ -1,0 +1,10 @@
+/* Add this style to your existing CSS or create a new CSS file */
+.tr__body:nth-child(even) td {
+    background-color: #c7c2c2;
+    /* Background color for even rows */
+}
+
+.tr__body:nth-child(odd) td {
+    background-color: #ffffff;
+    /* Background color for odd rows */
+}

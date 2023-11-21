@@ -6,6 +6,7 @@ import { Link, useParams } from 'react-router-dom';
 import pdf_icon from "../../assets/pdf_icon.png";
 import imgUrl from '../../imgUrl';
 import LeftHomePage from '../mainHomePage/LeftHomePage';
+import "./notice.css"
 
 
 const Notice = () => {

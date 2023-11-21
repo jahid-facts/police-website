@@ -1,0 +1,21 @@
+/* Add this style to your existing CSS or create a new CSS file */
+.tr__body:nth-child(even) td {
+    background-color: #ffffff;
+    /* background-color: #c7c2c2; */
+    /* Background color for even rows */
+}
+
+.tr__body:nth-child(odd) td {
+    /* background-color: #ffffff; */
+    background-color: #EDEFF0;
+    /* Background color for odd rows */
+}
+
+.thana__table thead tr th {
+    text-align: center;
+    white-space: nowrap;
+    font-size: 15px;
+    font-weight: 500;
+    background: #1d7008;
+    color: #eeeaea;
+}

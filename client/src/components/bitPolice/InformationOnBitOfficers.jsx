@@ -5,6 +5,7 @@ import BitModal from './BitModal';
 import axios from 'axios';
 import imgUrl from '../../imgUrl';
 import { Link } from 'react-router-dom';
+import "./InformationOnBitOfficers.css"
 
 const InformationOnBitOfficers = () => {
     const [selectedOption, setSelectedOption] = useState([]);
@@ -89,7 +90,8 @@ const InformationOnBitOfficers = () => {
                                     <tbody>
                                         {
                                             selectedOption.map((item, index) => <>
-                                                <tr className="tr__body" key={item.id}>
+                                                {/* <tr className="tr__body" key={item.id}>*/}
+                                                <tr className={`tr__body ${index % 2 === 0 ? 'even-row' : 'odd-row'}`} key={item.id}>
                                                     <td>{index + 1}.</td>
                                                     <td>{item.address}</td>
                                                     <td>{item.current_address}</td>
@@ -116,12 +118,13 @@ const InformationOnBitOfficers = () => {
 
                                                     </td>
                                                 </tr>
-                                                <tr>
+                                                {/* <tr> */}
+                                                <tr className={`tr__body ${index % 2 === 0 ? 'even-row' : 'odd-row'}`} key={`${item.id}-details`}>
                                                     <td colSpan={8}>
                                                         <div className="row g-1">
                                                             {item?.bitNews?.slice(0, 4).map(news =>
                                                                 <div key={news.id} className="col-3">
-                                                                    <Link  to={`/bit-news-details/${news.id}`} style={{ textDecoration: "none" }} >
+                                                                    <Link to={`/bit-news-details/${news.id}`} style={{ textDecoration: "none" }} >
 
                                                                         <div className="rc__card">
                                                                             <div className="card">

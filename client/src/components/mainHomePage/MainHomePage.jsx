@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Marquee from 'react-fast-marquee';
 import { Carousel } from 'react-responsive-carousel';
@@ -30,6 +30,7 @@ import VideoGalleryHome from '../gallery/VideoGalleryHome';
 import LeftHomePage from './LeftHomePage';
 import axios from 'axios';
 import imgUrl from '../../imgUrl';
+import "./MainHomePage.css"
 
 
 
@@ -58,9 +59,9 @@ const MainHomePage = () => {
     ]);
 
 
-    
 
-    
+
+
     const [homeCaraousel, setHomeCaraousel] = useState([
         { id: 1, title: "ওসি বাজিতপুর বিদায় সংবর্ধনা।", image: mainhome_slide1 },
         { id: 2, title: "ওসি বাজিতপুর বিদায় সংবর্ধনা।", image: mainhome_slide2 },
@@ -147,45 +148,45 @@ const MainHomePage = () => {
         },
     ]);
 
-const [homeBanner, setHomeBanner] = useState({});
-useEffect(() => {
-    axios.get('/banner').then((res) => {
-        setHomeBanner(res.data[0]);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-    axios.get('/bottom-news').then((res) => {
-        setMarqqueeData(res.data);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-    axios.get('/bottom-news').then((res) => {
-        setMarqqueeData(res.data);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-    axios.get('/activity-slider').then((res) => {
-        setHomeCaraousel(res.data);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-    axios.get('/work-document-section').then((res) => {
-        setRightInfoData(res.data);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-    axios.get('/notice').then((res) => {
-        setNoticeData(res.data);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-},[])
+    const [homeBanner, setHomeBanner] = useState({});
+    useEffect(() => {
+        axios.get('/banner').then((res) => {
+            setHomeBanner(res.data[0]);
+        })
+            .catch((err) => {
+                console.log(err);
+            })
+        axios.get('/bottom-news').then((res) => {
+            setMarqqueeData(res.data);
+        })
+            .catch((err) => {
+                console.log(err);
+            })
+        axios.get('/bottom-news').then((res) => {
+            setMarqqueeData(res.data);
+        })
+            .catch((err) => {
+                console.log(err);
+            })
+        axios.get('/activity-slider').then((res) => {
+            setHomeCaraousel(res.data);
+        })
+            .catch((err) => {
+                console.log(err);
+            })
+        axios.get('/work-document-section').then((res) => {
+            setRightInfoData(res.data);
+        })
+            .catch((err) => {
+                console.log(err);
+            })
+        axios.get('/notice').then((res) => {
+            setNoticeData(res.data);
+        })
+            .catch((err) => {
+                console.log(err);
+            })
+    }, [])
 
     return (
         <div className="container pt-1">
@@ -196,7 +197,7 @@ useEffect(() => {
                             <img src={`${imgUrl}${homeBanner?.image}`} className="img-fluid" alt="image" loading='lazy' />
                         </div>
                     </div>
-                    <div className="row ">
+                    <div className="row">
                         <div className="col-12">
                             <div className="home__marquee">
                                 <Marquee
@@ -220,7 +221,7 @@ useEffect(() => {
                         </div>
                     </div>
 
-                    <div className="row pt-5">
+                    <div className="row pt-3">
                         <div className="col-12">
                             <div className="home__carousel">
                                 <Carousel
@@ -250,7 +251,7 @@ useEffect(() => {
                     </div>
 
 
-                    <div className="row g-3 pt-5">
+                    <div className="row g-2 pt-2">
                         {
                             rightInfoData !== undefined && rightInfoData.map((item) => {
                                 return (
@@ -321,13 +322,13 @@ useEffect(() => {
                         </div>
                     </div>
 
-                    <div className="row pt-5">
+                    <div className="row pt-1">
                         <div className="col-12">
                             <PhotoGalleryHome />
                         </div>
                     </div>
 
-                    <div className="row pt-4">
+                    <div className="row pt-1">
                         <div className="col-12">
                             <VideoGalleryHome />
                         </div>
