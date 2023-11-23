@@ -32,7 +32,8 @@
     padding: 0px 4px;
 }
 
-.h6, h6 {
+.h6,
+h6 {
     font-size: 13px;
 }
 
@@ -291,25 +292,17 @@
 
 /* Add this style to your existing CSS or create a new CSS file */
 .link_footer :hover {
-    padding: 2px;
     background-color: #C5D394;
-    
-    /* Change the background color on hover */
-    /* Add any other styles you want to apply on hover */
+    display: inline-block;
 }
 
-/* Optional: Add styles for the nested elements inside the link */
 .link_footer:hover i {
     color: #776262;
-    /* Change the color of the icon on hover */
 }
 
 .link_footer:hover .ft__txt { 
-    /* background-color: #EBF5FB; */
     color: #242526;
-    /* Change the color of the text on hover */
 }
-
 
 
 @media only screen and (max-width: 768px) {

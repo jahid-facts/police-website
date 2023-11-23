@@ -1,3 +1,42 @@
+/* .card:hover {
+    background: aquamarine;
+    opacity: 1;
+} */
+
+.card {
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 140px;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: aquamarine;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    /* z-index: -1; */
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card h6,
+.card p,
+.card a {
+    position: relative;
+    z-index: 1;
+}
+
+.card .home__dig img {
+    position: relative;
+    z-index: 1;
+}
+
+
 
 .fb__page-container {
     width: 100%;
