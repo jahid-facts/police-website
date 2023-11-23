@@ -64,6 +64,7 @@ exports.saveSubUnits = async (req, res) => {
     },
   })
   res.json(news)
+  // console.log(news)
 
 }
 exports.updateSubUnits = async (req, res) => {

@@ -4,24 +4,40 @@ import { useState } from 'react';
 import http from '../../http';
 
 export default function Dashboard() {
+
     const [users, setUsers] = useState(0);
     const [thana, setThana] = useState(0);
-    const [bitOfficer, setBitOfficer] = useState(0);
+    // const [bitOfficer, setBitOfficer] = useState(0);
+    const [bitOfficerCount, setbitOfficerCount] = useState(0);
     const [circle, setCircle] = useState(0);
+
     useEffect(() => {
-        http.get('users').then(res => {
-            setUsers(res.data.length)
-        })
+        // http.get('users').then(res => {
+        //     setUsers(res.data.length)
+        // })
+
+        http.get('total-user').then(res => {
+            setUsers(res.data.userCount);
+            // setUsers(res.data.length);
+        });
+
         http.get('sub-units-thana').then(res => {
             setThana(res.data)
         })
-        http.get('bit-officers').then(res => {
-            setBitOfficer(res.data.length)
-        })
+        // http.get('bit-officers').then(res => {
+        //     setBitOfficer(res.data.length)
+        // })
+
+        http.get('bit-policing-count').then(res => {
+            // setBitOfficer(res.data.bitPolicingCount);
+            setbitOfficerCount(res.data.bitOfficerCount);
+        });
+
         http.get('sub-units-circle').then(res => {
             setCircle(res.data)
         })
     }, [])
+
     return (
         <div className='page-content'>
             <div className="row">
@@ -29,7 +45,7 @@ export default function Dashboard() {
                     <div className="custom-card p-3">
                         <div className="d-flex justify-content-between align-items-center">
                             <span style={{ fontSize: "25px", color: "#8A96A5" }}>Total Users</span>
-                        
+
                         </div>
                         <div className="d-flex mt-2">
                             <div className="dashboard-icon d-flex justify-content-center align-items-center">
@@ -81,7 +97,7 @@ export default function Dashboard() {
                                 <i className="fa-solid fa-user-doctor"></i>
                             </div>
                             <div>
-                                <span className='ms-3' style={{ fontSize: "25px", fontWeight: "700" }}>{bitOfficer}</span>
+                                <span className='ms-3' style={{ fontSize: "25px", fontWeight: "700" }}>{bitOfficerCount}</span>
                             </div>
                         </div>
                     </div>

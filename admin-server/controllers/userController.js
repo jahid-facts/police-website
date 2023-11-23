@@ -104,8 +104,17 @@ exports.getUser = async (req, res) => {
   });
   delete user.password;
   res.json(user)
+  // console.log(user)
 
 }
+
+// Update the getUser function to get the count of users
+exports.getTotalUser = async (req, res) => {
+  const userCount = await prisma.user.count();
+  res.json({ userCount });
+  console.log(userCount)
+}
+
 exports.getSingleUser = async (req, res) => {
   try {
     const user = await prisma.user.findUnique({

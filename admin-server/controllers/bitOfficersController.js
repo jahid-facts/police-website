@@ -14,7 +14,22 @@ exports.getBitOfficers = async (req, res) => {
 
   });
   res.json(bitOfficer)
+  // console.log(bitOfficer)
 }
+
+exports.getTotalBitOfficers = async (req, res) => {
+
+  try {
+    const bitOfficerCount = await prisma.Bit_Officers.count();
+    res.json({ bitOfficerCount });
+    console.log(bitOfficerCount)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+
 exports.getBitOfficersOnly = async (req, res) => {
   const bitOfficer = await prisma.Bit_Officers.findMany({});
   res.json(bitOfficer)
@@ -77,22 +92,22 @@ exports.saveBitOfficers = async (req, res) => {
           image,
         },
       });
-      const role = await prisma.Role.findUnique({
-        where: {
-          role: "Bit Police"
-        }
-      })
-      const hashedPassword = await bcrypt.hash(mobile, 10);
-      const user = await prisma.User.create({
-        data: {
-          name,
-          email : mobile,
-          password: hashedPassword,
-          role_id: role.id,
-          permissions: bitOfficer.id?.toString(),
-          permissions_module: "BitPolice"
-        },
-      })
+      // const role = await prisma.Role.findUnique({
+      //   where: {
+      //     role: "Bit Police"
+      //   }
+      // })
+      // const hashedPassword = await bcrypt.hash(mobile, 10);
+      // const user = await prisma.User.create({
+      //   data: {
+      //     name,
+      //     email: mobile,
+      //     password: hashedPassword,
+      //     role_id: role.id,
+      //     permissions: bitOfficer.id?.toString(),
+      //     permissions_module: "BitPolice"
+      //   },
+      // })
       res.json(bitOfficer);
     } catch (error) {
       console.log(error)
