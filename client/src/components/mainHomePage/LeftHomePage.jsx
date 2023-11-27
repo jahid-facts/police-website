@@ -19,58 +19,128 @@ const LeftHomePage = () => {
             .then(res => setSpData(res.data))
     }, [])
 
-    const [govImportenceLinkData, setGovImportenceLinkData] = useState([
-        {
-            id: 1,
-            image: list_icon,
-            title: "National Web Portal",
-            link: "https://bangladesh.gov.bd/index.php",
-        },
-        {
-            id: 2,
-            image: list_icon,
-            title: "MOPA",
-            link: "https://mopa.gov.bd/",
-        },
-        {
-            id: 3,
-            image: list_icon,
-            title: "Ministry of Home Affairs",
-            link: "https://mha.gov.bd/",
-        },
-        {
-            id: 4,
-            image: list_icon,
-            title: "Department of Public Safety",
-            link: "https://mhapsd.gov.bd/",
-        },
-        {
-            id: 5,
-            image: list_icon,
-            title: "Department of Security Services",
-            link: "https://ssd.gov.bd/",
-        },
-        {
-            id: 6,
-            image: list_icon,
-            title: "On Line Police Clearance",
-            link: "http://pcc.police.gov.bd:8080/ords/f?p=500:1::::::",
-        },
-        {
-            id: 7,
-            image: list_icon,
-            title: "Legal Instruments",
-            link: "https://www.police.gov.bd/en/legal_instruments",
-        },
-        {
-            id: 8,
-            image: list_icon,
-            title: "Innovative Activities",
-            link: "https://www.police.gov.bd/en/innovative_activities",
-        },
-    ]);
+    // const [govImportenceLinkData, setGovImportenceLinkData] = useState([
+    //     {
+    //         id: 1,
+    //         image: list_icon,
+    //         title: "National Web Portal",
+    //         link: "https://bangladesh.gov.bd/index.php",
+    //     },
+    //     {
+    //         id: 2,
+    //         image: list_icon,
+    //         title: "MOPA",
+    //         link: "https://mopa.gov.bd/",
+    //     },
+    //     {
+    //         id: 3,
+    //         image: list_icon,
+    //         title: "Ministry of Home Affairs",
+    //         link: "https://mha.gov.bd/",
+    //     },
+    //     {
+    //         id: 4,
+    //         image: list_icon,
+    //         title: "Department of Public Safety",
+    //         link: "https://mhapsd.gov.bd/",
+    //     },
+    //     {
+    //         id: 5,
+    //         image: list_icon,
+    //         title: "Department of Security Services",
+    //         link: "https://ssd.gov.bd/",
+    //     },
+    //     {
+    //         id: 6,
+    //         image: list_icon,
+    //         title: "On Line Police Clearance",
+    //         link: "http://pcc.police.gov.bd:8080/ords/f?p=500:1::::::",
+    //     },
+    //     {
+    //         id: 7,
+    //         image: list_icon,
+    //         title: "Legal Instruments",
+    //         link: "https://www.police.gov.bd/en/legal_instruments",
+    //     },
+    //     {
+    //         id: 8,
+    //         image: list_icon,
+    //         title: "Innovative Activities",
+    //         link: "https://www.police.gov.bd/en/innovative_activities",
+    //     },
+    // ]);
+
+    const [govImportenceLinkData, setGovImportenceLinkData] = useState([]);
+
+    // useEffect(() => {
+
+    //     axios.get(`important-link`)
+    //         .then(res => setGovImportenceLinkData(res.data))
+
+        // Example: Fetch data from an API
+        // fetch('your_api_endpoint')
+        //   .then(response => response.json())
+        //   .then(data => setGovImportenceLinkData(data));
+
+        // Example: Set data dynamically
+        // const dynamicData = [
+            // {
+            //     id: 1,
+            //     image: list_icon,
+            //     title: "National Web Portal",
+            //     link: "https://bangladesh.gov.bd/index.php",
+            // },
+            // {
+            //     id: 2,
+            //     image: list_icon,
+            //     title: "MOPA",
+            //     link: "https://mopa.gov.bd/",
+            // },
+            // {
+            //     id: 3,
+            //     image: list_icon,
+            //     title: "Ministry of Home Affairs",
+            //     link: "https://mha.gov.bd/",
+            // },
+            // {
+            //     id: 4,
+            //     image: list_icon,
+            //     title: "Department of Public Safety",
+            //     link: "https://mhapsd.gov.bd/",
+            // },
+            // {
+            //     id: 5,
+            //     image: list_icon,
+            //     title: "Department of Security Services",
+            //     link: "https://ssd.gov.bd/",
+            // },
+            // {
+            //     id: 6,
+            //     image: list_icon,
+            //     title: "On Line Police Clearance",
+            //     link: "http://pcc.police.gov.bd:8080/ords/f?p=500:1::::::",
+            // },
+            // {
+            //     id: 7,
+            //     image: list_icon,
+            //     title: "Legal Instruments",
+            //     link: "https://www.police.gov.bd/en/legal_instruments",
+            // },
+            // {
+            //     id: 8,
+            //     image: list_icon,
+            //     title: "Innovative Activities",
+            //     link: "https://www.police.gov.bd/en/innovative_activities",
+            // },
+    //     ];
+
+    //     setGovImportenceLinkData(dynamicData);
+    // }, []);
+
+
     const [weatherData, setWeatherData] = useState({});
     const [rightOthers, setRightOthers] = useState([]);
+
     useEffect(() => {
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=` + "bangladesh" + `&APPID=381e82a6a7d50e7c90e00887344e21c5&units=metric`)
             .then((response) => {
@@ -93,7 +163,7 @@ const LeftHomePage = () => {
                             return (
                                 <div className="col-12" key={index}>
                                     <div className="home__dig__card">
-                                        <div className="card">
+                                        <div className="card police-card">
                                             <h6 className="card__title pt-2">{item?.title}</h6>
                                             <div className="home__dig text-center">
                                                 <img src={`${imgUrl}/${item?.image}`} className="img-fluid" alt="image" loading='lazy' />

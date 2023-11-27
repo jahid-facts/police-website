@@ -22,12 +22,24 @@ const FooterBottom = () => {
         <div className="pt-0" style={{ background: '#e9edf1' }}>
             <div className="container mb-3">
                 <div className="mb-2 footer-button-section text-center">
+
                     <ul className='list-unstyled m-0'>
+                        {button?.length > 0 &&
+                            button.map((item, index) => (
+                                <li className='d-inline-block' key={index}>
+                                    <Link className='footer-button' to={item.link} target="_blank" rel="noopener noreferrer">
+                                        {item.title}
+                                    </Link>
+                                </li>
+                            ))}
+                    </ul>
+
+                    {/* <ul className='list-unstyled m-0'>
                         {
                             button?.length > 0 && button.map((item, index) =>
                                 <li className='d-inline-block' key={index}><Link className='footer-button' to={item.link}>{item.title}</Link></li>)
                         }
-                    </ul>
+                    </ul> */}
                 </div>
                 <div className="row g-3">
                     <div className="col-md-8">
@@ -57,12 +69,12 @@ const FooterBottom = () => {
                     </div>
                 </div>
             </div>
-            <hr style={{borderTop: "2px dotted #800000", margin: "-5px 0"}} />
+            <hr style={{ borderTop: "2px dotted #800000", margin: "-5px 0" }} />
             <div className="d-md-flex justify-content-between ft__copyright">
                 <p className=" mb-0"> <span className="me-3"><span className="me-3"> <i className="fa-solid fa-users me-1"></i>Users Today : {visitorData?.todayVisitorCount}</span> <i className="fa-solid fa-chart-simple"></i> Total Users : {visitorData?.allVisitorCount}</span> </p>
                 <p className=" mb-0">ডিজাইন & ডেভেলপড বাইঃ <a href={data?.company_link ? data?.company_link : "#"} target='_blank' style={{ color: 'red', background: 'inherit', textDecoration: "none" }}>{data?.company}</a></p>
             </div>
-            <hr style={{borderTop: "3px solid #800000", margin: "-5px 0"}} />
+            <hr style={{ borderTop: "3px solid #800000", margin: "-5px 0" }} />
         </div>
     );
 };

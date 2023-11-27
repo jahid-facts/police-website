@@ -13,7 +13,7 @@ const HeaderNew = () => {
     };
     const location = useLocation();
 
-    const [divisionPoliceData, setDivisionPoliceData] = useState([] );
+    const [divisionPoliceData, setDivisionPoliceData] = useState([]);
     // console.log("divisionPoliceData", divisionPoliceData);
 
     const [adminData, setAdminData] = useState([]);
@@ -32,59 +32,59 @@ const HeaderNew = () => {
     const [crimeManagementData, setCrimeManagementData] = useState([]);
 
     const [noticeBoardData, setNoticeBoard] = useState([
-        {
-            name: 'নোটিশ বোর্ড',
-            link: '#',
-            bg_color: '#DE3163',
-            color: '#8b8d8f',
-            padding: "0.4rem",
-            display: "block",
-            font_size: "14px",
-            margin_right: "0px",
+        // {
+        //     name: 'নোটিশ বোর্ড',
+        //     link: '#',
+        //     bg_color: '#DE3163',
+        //     color: '#8b8d8f',
+        //     padding: "0.4rem",
+        //     display: "block",
+        //     font_size: "14px",
+        //     margin_right: "0px",
 
-            min_width: "47rem",
-            transform: "translateX(0px)",
-            // padding: "15px",
-            box_shadow: "0px 4px 4px rgb(0 0 0 / 25%)",
-            subMenu: [
-                {
-                    name: 'টেন্ডার',
-                    link: 'notice-tenders',
-                    bg_color: '#DE3163',
-                    color: '#DE3163',
-                    margin_bottom: "0px",
-                    font_size: "14px",
-                    font_weight: "400",
-                },
-                {
-                    name: 'এনওসি',
-                    link: 'noc',
-                    bg_color: '#DE3163',
-                    color: '#DE3163',
-                    margin_bottom: "0px",
-                    font_size: "14px",
-                    font_weight: "400",
-                },
-                {
-                    name: 'নোটিশ',
-                    link: 'notice',
-                    bg_color: '#DE3163',
-                    color: '#DE3163',
-                    margin_bottom: "0px",
-                    font_size: "14px",
-                    font_weight: "400",
-                },
-                {
-                    name: 'নিয়োগ বিজ্ঞপ্তি',
-                    link: 'recruitment-notification',
-                    bg_color: '#DE3163',
-                    color: '#DE3163',
-                    margin_bottom: "0px",
-                    font_size: "14px",
-                    font_weight: "400",
-                },
-            ],
-        },
+        //     min_width: "47rem",
+        //     transform: "translateX(0px)",
+        //     // padding: "15px",
+        //     box_shadow: "0px 4px 4px rgb(0 0 0 / 25%)",
+        //     subMenu: [
+        //         {
+        //             name: 'টেন্ডার',
+        //             link: 'notice-tenders',
+        //             bg_color: '#DE3163',
+        //             color: '#DE3163',
+        //             margin_bottom: "0px",
+        //             font_size: "14px",
+        //             font_weight: "400",
+        //         },
+        //         {
+        //             name: 'এনওসি',
+        //             link: 'noc',
+        //             bg_color: '#DE3163',
+        //             color: '#DE3163',
+        //             margin_bottom: "0px",
+        //             font_size: "14px",
+        //             font_weight: "400",
+        //         },
+        //         {
+        //             name: 'নোটিশ',
+        //             link: 'notice',
+        //             bg_color: '#DE3163',
+        //             color: '#DE3163',
+        //             margin_bottom: "0px",
+        //             font_size: "14px",
+        //             font_weight: "400",
+        //         },
+        //         {
+        //             name: 'নিয়োগ বিজ্ঞপ্তি',
+        //             link: 'recruitment-notification',
+        //             bg_color: '#DE3163',
+        //             color: '#DE3163',
+        //             margin_bottom: "0px",
+        //             font_size: "14px",
+        //             font_weight: "400",
+        //         },
+        //     ],
+        // },
     ]);
 
     const [galleryData, setSignificantAchievementsData] = useState([
@@ -285,7 +285,7 @@ const HeaderNew = () => {
                                     style={{
                                         marginRight: "0px",
                                         // color: "#8b8d8f",
-                                        color:'#c40a2a',
+                                        color: '#c40a2a',
                                         fontSize: "14px",
                                         // backgroundColor: item.bg_color,
                                         padding: "0.4rem",
@@ -716,7 +716,8 @@ const HeaderNew = () => {
                                 <Link to='#' className={`navbar-brand drop__bit__policing__hover ${location.pathname === "" && "active-nav"}`} id="navbarDropdown13" role="button" data-bs-toggle="dropdown" aria-expanded="false"
                                     style={{
                                         marginRight: '0px',
-                                        color: '#01DFD7',
+                                        // color: '#01DFD7',
+                                        color: "#03bbb5",
                                         fontSize: '14px',
                                         // backgroundColor: item.bg_color,
                                         padding: '0.4rem',
@@ -737,7 +738,8 @@ const HeaderNew = () => {
                                                                     <div className="ps-2">
                                                                         <p
                                                                             style={{
-                                                                                color: '#01DFD7',
+                                                                                // color: '#01DFD7',
+                                                                                color: "#03bbb5",
                                                                                 fontWeight: '400',
                                                                                 fontSize: '14px',
                                                                                 marginBottom: '0px',
@@ -758,7 +760,8 @@ const HeaderNew = () => {
                                                         <div className="ps-2">
                                                             <p
                                                                 style={{
-                                                                    color: '#01DFD7',
+                                                                    // color: '#01DFD7',
+                                                                    color: "#03bbb5",
                                                                     fontWeight: '400',
                                                                     fontSize: '14px',
                                                                     marginBottom: '0px',

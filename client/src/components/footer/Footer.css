@@ -116,6 +116,11 @@ h6 {
 
 }
 
+.align-items-start {
+    padding: 1px;
+    align-items: flex-start !important;
+}
+
 .ft__rt__arrow {
     margin-top: 3px;
     color: #9da4a7;
@@ -123,7 +128,8 @@ h6 {
 }
 
 .ft__txt {
-    margin-bottom: 10px !important;
+    /* margin-bottom: 10px !important; */
+    margin-bottom: 1px !important;
     color: #717374;
 }
 
@@ -300,7 +306,7 @@ h6 {
     color: #776262;
 }
 
-.link_footer:hover .ft__txt { 
+.link_footer:hover .ft__txt {
     color: #242526;
 }
 
