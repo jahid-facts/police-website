@@ -1,3 +1,21 @@
 .pt-5 {
     padding-top: 0.5rem !important;
 }
+
+/* @media (max-width: 767.98px) {
+   
+    .home__marquee__txt {
+        font-size: 14px;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .container {
+        padding: 2%;
+      
+    }
+
+} */

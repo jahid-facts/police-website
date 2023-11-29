@@ -192,6 +192,7 @@ const MainHomePage = () => {
         <div className="container pt-1">
             <div className="row g-3">
                 <div className="col-md-9">
+                    {/* <div className="col-md-9 col-sm-12"> */}
                     <div className="row">
                         <div className="col-12">
                             <img src={`${imgUrl}${homeBanner?.image}`} className="img-fluid" alt="image" loading='lazy' />
@@ -338,6 +339,7 @@ const MainHomePage = () => {
 
 
                 <div className="col-md-3">
+                    {/* <div className="col-md-3 col-sm-12"> */}
                     <LeftHomePage />
                 </div>
 

@@ -332,12 +332,20 @@
 .container-sm,
 .container-xl {
   max-width: 1195px;
+  /* max-width: 992px; */
+  /* width: 100%; */
 }
 
 .navbar-dark .navbar-toggler {
   border-color: #42a108 !important;
   color: #42a108 !important;
 }
+
+/* .ht__navbar__logo {
+  max-width: 100%;
+} */
+
+
 
 @media only screen and (max-width: 768px) {
 
