@@ -1,6 +1,8 @@
 const express = require('express');
-const { getSlide,saveSlide,getSingleSlide,updateSlide,deleteSlide } = require('../controllers/rightSidebarOthersController');
+const { getSlide, saveSlide, getSingleSlide, updateSlide, deleteSlide } = require('../controllers/rightSidebarOthersController');
 const router = express.Router();
+
+// router.post('/saveTitle', getTitle)
 
 router.get('/right-side-others', getSlide);
 router.get('/right-side-others/:id', getSingleSlide);

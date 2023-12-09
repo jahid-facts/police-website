@@ -5,6 +5,20 @@ const multer = require("multer");
 const fs = require('fs');
 
 const prisma = new PrismaClient();
+
+
+// const savedTitles = []; // Store saved titles in memory for simplicity
+
+// // app.post('/saveTitle', (req, res) => {
+// exports.getTitle = async (req, res) => {
+//   const { title } = req.body;
+
+//   // Save the title to your data store (e.g., database)
+//   savedTitles.push(title);
+
+//   res.json({ message: 'Title saved successfully!' });
+// };
+
 exports.getSlide = async (req, res) => {
   const slide = await prisma.right_others.findMany();
   res.json(slide)
@@ -83,10 +97,10 @@ exports.updateSlide = async (req, res) => {
       }
       const newImage = req.file;
       const previousImagePath = path.join('public', 'uploads', existingSlide.image);
-      if(newImage){
-        try{
-         fs.unlinkSync(previousImagePath); 
-        }catch(error){
+      if (newImage) {
+        try {
+          fs.unlinkSync(previousImagePath);
+        } catch (error) {
           console.log(error)
         }
       }
@@ -115,13 +129,13 @@ exports.deleteSlide = async (req, res) => {
     }
   })
   const previousImagePath = path.join('public', 'uploads', slide.image);
-  if(previousImagePath){
-    try{
-     fs.unlinkSync(previousImagePath); 
-    }catch(error){
+  if (previousImagePath) {
+    try {
+      fs.unlinkSync(previousImagePath);
+    } catch (error) {
       console.log(error)
     }
-    
+
   }
   res.json(slide)
 }

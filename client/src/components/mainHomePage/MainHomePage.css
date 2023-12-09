@@ -2,6 +2,10 @@
     padding-top: 0.5rem !important;
 }
 
+.notice__list {
+    margin-top: 60px;
+}
+
 /* @media (max-width: 767.98px) {
    
     .home__marquee__txt {

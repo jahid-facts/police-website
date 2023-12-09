@@ -61,18 +61,27 @@ import FooterButtonLinks from '../pages/setup/FooterContent/FooterButtonLinks';
 import Dashboard from '../components/Dashboard/Dashboard';
 import ContactAddress from '../pages/setup/Contact/ConatactAddress';
 import ContactPerson from '../pages/setup/Contact/ContactPerson';
+
+import DynamicLink from '../pages/setup/Dynamic Link/DynamicLink';
+import MenuBar from '../pages/setup/MenuBar/MenuBar';
+
 export const RoleContext = createContext();
 
 const Auth = () => {
     const { getToken } = AuthUser();
     const user = getToken();
     const location = useLocation();
+
+    const [menuTitle, setMenuTitle] = useState([]);
+    const [titles, setTitles] = useState([]);
+
     const [userRole, setUserRole] = useState({
         home_page: [],
         administration: [],
         service: [],
         user: [],
     });
+
     useEffect(() => {
         http.get(`users/${user.id}`).then(res => {
             const { home_page, administration, service, user } = res.data?.role;
@@ -85,6 +94,31 @@ const Auth = () => {
         })
     }, [user.id, location]);
     console.log(userRole)
+
+    useEffect(() => {
+        const fetchTitles = async () => {
+            try {
+                const res = await fetch('http://localhost:4000/get-all-menu-title');
+                const response = await fetch('http://localhost:4000/titles');
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const menuData = await res.json();
+                const data = await response.json();
+
+                setMenuTitle(menuData);
+                setTitles(data);
+
+            } catch (error) {
+                console.error('Error fetching titles:', error);
+            }
+        };
+
+        fetchTitles();
+    }, []);
+
     return (
         <RoleContext.Provider value={userRole}>
             <div className="main-wrapper">
@@ -122,9 +156,42 @@ const Auth = () => {
                                 <Route path="/footer-section" element={<FooterHeadings />} />
                                 <Route path="/footer-content" element={<FooterContent />} />
                                 <Route path="/company-social-media" element={<FooterCompanySocialMedia />} />
+
                                 <Route path="/right-officer-section" element={<Sp />} />
                                 <Route path="/right-important-links" element={<RightSideBarImportantLinks />} />
                                 <Route path="/right-others-section" element={<RightSidebarOthers />} />
+                                <Route path="/right-links" element={<DynamicLink />} />
+
+                                {/* <Route path="/right/:titleId" element={<Sp />} />
+                                <Route path="/right/:titleId" element={<RightSideBarImportantLinks />} />
+                                <Route path="/right/:titleId" element={<RightSidebarOthers />} /> */}
+                                {/* <Route path="/right-links" element={<DynamicLink />} />
+                                {titles.map((title) => (
+                                    <Route key={title.id} path={`/right/:titleId/*`}>
+
+                                        <Route
+                                            index
+                                            element={<Sp />}
+                                        />
+
+
+                                        <Route
+                                            path="important-links"
+                                            element={<RightSideBarImportantLinks />}
+                                        />
+
+
+                                        <Route
+                                            path="others-section"
+                                            element={<RightSidebarOthers />}
+                                        />
+                                    </Route>
+                                ))} */}
+
+                                {/* <Route path="/right-important-links" element={<DynamicLink />} /> */}
+
+                                {/* <Route path="/right" component={<DynamicLink />} /> */}
+
                                 <Route path="/footer-button" element={<FooterButtonLinks />} />
                                 <Route path="/logo" element={<Dig />} />
                                 <Route path="/contact-address" element={<ContactAddress />} />
@@ -160,6 +227,8 @@ const Auth = () => {
                                 <Route path="/phone-directory" element={<PhoneDirectories />} />
                                 <Route path="/crime-management" element={<CrimeManagement />} />
                                 <Route path="/bit-news" element={<BitPolicingNews />} />
+
+                                <Route path="/menu-bar-title" element={<MenuBar />} />
                             </>
                         }
                         {

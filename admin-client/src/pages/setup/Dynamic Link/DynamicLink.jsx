@@ -1,23 +1,60 @@
+// import React, { useState } from 'react';
+
+// const DynamicLink = ({ title, onEdit, onDelete }) => {
+//     const [isEditing, setEditing] = useState(false);
+//     const [editedTitle, setEditedTitle] = useState(title);
+
+//     const handleEdit = () => {
+//         setEditing(true);
+//     };
+
+//     const handleSave = () => {
+//         onEdit(editedTitle);
+//         setEditing(false);
+//     };
+
+//     const handleDelete = () => {
+//         onDelete();
+//     };
+
+//     return (
+//         <div>
+//             {isEditing ? (
+//                 <div>
+//                     <input
+//                         type="text"
+//                         value={editedTitle}
+//                         onChange={(e) => setEditedTitle(e.target.value)}
+//                     />
+//                     <button onClick={handleSave}>Save</button>
+//                 </div>
+//             ) : (
+//                 <div>
+//                     <span>{title}</span>
+//                     <button onClick={handleEdit}>Edit</button>
+//                     <button onClick={handleDelete}>Delete</button>
+//                 </div>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default DynamicLink;
 
 import MaterialTable from 'material-table'
-import React, { useContext } from 'react'
-
-// import { useParams } from 'react-router-dom';
-
+import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Modal from 'react-modal';
 import Swal from 'sweetalert2';
 import http from '../../../http';
+import { useContext } from 'react';
 import { RoleContext } from '../../../navbar/Auth';
 
-export default function RightSidebarOthers() {
+export default function DynamicLink() {
     const userRole = useContext(RoleContext);
     const { home_page } = userRole;
-
-    // const { titleId } = useParams();
-
-    const addSlide = () => {
+    const addContents = () => {
         setIsOpen(true);
     }
     const deleteRowData = (id) => {
@@ -32,7 +69,7 @@ export default function RightSidebarOthers() {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    http.delete(`delete-right-side-others/${id}`)
+                    http.delete(`titles/${id}`)
                         .then((res) => {
                             setUpdate(!update);
                             setIsOpen(false);
@@ -40,7 +77,7 @@ export default function RightSidebarOthers() {
                                 position: 'top-center',
                                 icon: 'success',
                                 title: 'Success !',
-                                text: 'News Deleted Successfully',
+                                text: 'Heading Deleted Successfully',
                                 showConfirmButton: false,
                                 timer: 1500
                             })
@@ -49,9 +86,9 @@ export default function RightSidebarOthers() {
             })
     }
     const editData = (id) => {
-        http.get(`right-side-others/${id}`)
+        http.get(`titles/${id}`)
             .then((res) => {
-                setSlideData({ ...res.data, title: "" });
+                setContentData(res.data);
                 setIsOpen(true);
             })
             .catch((err) => {
@@ -68,24 +105,16 @@ export default function RightSidebarOthers() {
                 textAlign: "center",
             },
         },
-
         {
             title: "Title",
             field: `title`,
-            cellStyle: {
-                textAlign: "center",
-            },
+
         },
-        {
-            title: "Image",
-            field: `image`,
-            render: (row) => (
-                <img src={`${global.img_Url}/${row.image}`} style={{ height: "100px", maxWidth: "600px" }} className='img-fluid' alt="test" />
-            ),
-            cellStyle: {
-                textAlign: "center",
-            },
-        },
+        // {
+        //     title: "Link",
+        //     field: `link`,
+
+        // },
 
 
         {
@@ -120,31 +149,29 @@ export default function RightSidebarOthers() {
         },
     ];
     const [data, setData] = useState([]);
+    const [headings, setHeadings] = useState([]);
     const [update, setUpdate] = useState(false);
     const [spinner, setSpinner] = useState(false);
+
     useEffect(() => {
         const controller = new AbortController();
         setSpinner(true);
-        http
-            .get(`right-side-others`)
-
-        // http.get(`right-side-others/${titleId}`)
+        http.get(`titles`)
             .then((res) => {
-                setData(res.data)
+                setData(res.data);
+                // setHeadings(res.data.headings);
                 setSpinner(false);
+                // console.log(res)
             })
+
             .catch((err) => {
                 console.log(err);
-            });
-
+            })
 
         return () => {
             controller.abort();
         };
-        }, [update]);
-
-    // }, [update, titleId]);
-
+    }, [update]);
     // add modal 
     const customStyles = {
         content: {
@@ -163,24 +190,22 @@ export default function RightSidebarOthers() {
         },
     };
     const [modalIsOpen, setIsOpen] = useState(false);
-    const [slideData, setSlideData] = useState({
-        image: "",
-        title: "",
+    const [contentData, setContentData] = useState({
+        title: ""
     })
     const handleChange = (e) => {
-        setSlideData({ ...slideData, [e.target.name]: e.target.files[0] });
+        setContentData({ ...contentData, [e.target.name]: e.target.value });
+
+        // setPageTitle(e.target.value);
     }
     const submitData = (e) => {
         e.preventDefault()
-        const formData = new FormData();
-        formData.append('image', slideData.image);
-        formData.append('title', slideData.title);
-        if (slideData.id) {
-            http.put(`update-right-side-others/${slideData.id}`, formData)
+        if (contentData.id) {
+            http.put(`titles/${contentData.id}`, contentData)
                 .then((res) => {
                     setUpdate(!update);
                     setIsOpen(false);
-                    setSlideData({ image: "", title: "" });
+                    setContentData({ title: "" });
                     Swal.fire({
                         position: 'top-center',
                         icon: 'success',
@@ -202,11 +227,11 @@ export default function RightSidebarOthers() {
                     })
                 })
         } else {
-            http.post('save-right-side-others', formData)
+            http.post('titles', { title: contentData.title })
                 .then((res) => {
                     setUpdate(!update);
                     setIsOpen(false);
-                    setSlideData({ image: "", title: "" });
+                    setContentData({ title: "", link: "" });
                     Swal.fire({
                         position: 'top-center',
                         icon: 'success',
@@ -232,20 +257,23 @@ export default function RightSidebarOthers() {
     }
     const closeModal = () => {
         setIsOpen(false);
-        setSlideData({ image: "", title: "" });
+        // setContentData({ title: "", link: "" });
+        setContentData({ title: "" });
     }
+    console.log(headings)
     return (
         <div className='page-content adjustment-type-table'>
             <div className="custom-card p-2 d-flex justify-content-between mb-2 align-items-center">
-                <h6>Right Sidebar Others</h6>
-                {
-                    home_page.includes('Add Home') &&
-                    <div>
-                        <button style={{ marginTop: "1px" }} onClick={addSlide} className='btn btn-sm btn-primary float-end'>Add </button>
-                    </div>
-                }
-            </div>
+                <h6>Important Links</h6>
 
+                {/* <label>Title:</label>
+                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                <button onClick={handleSave}>Save Title</button> */}
+
+                <div>
+                    <button style={{ marginTop: "1px" }} onClick={addContents} className='btn btn-sm btn-primary float-end'>Add</button>
+                </div>
+            </div>
             <MaterialTable
                 columns={columns}
                 data={data}
@@ -269,21 +297,16 @@ export default function RightSidebarOthers() {
                 <div className="product_modal">
                     <div className="page-content">
                         <div className=" patients-head ">
-                            <h5 className="fw-normal custom_py-3 px-2  text-start mb-2 card-name">Add Slide
+                            <h5 className="fw-normal custom_py-3 px-2  text-start mb-2 card-name">Add Content
                                 <span style={{ cursor: "pointer", fontSize: "16px" }} onClick={closeModal} className='float-end'><i className="fal fa-times"></i></span>
                             </h5>
                         </div>
 
                         <div className=" p-3">
                             <form onSubmit={submitData}>
-                                <input onChange={(e) => setSlideData({ ...slideData, title: e.target.value })} name='title' value={slideData.name} type="text" className="form-control form-control-sm my-2" required placeholder="Title" />
-                                {
-                                    slideData.id ?
-                                        <input className="form-control form-control-sm my-2" name="image" onChange={handleChange} type="file" accept='image/*' />
-                                        :
-                                        <input required className="form-control form-control-sm my-2" name="image" onChange={handleChange} type="file" accept='image/*' />
-                                }
-
+                                <input onChange={handleChange} name='title' value={contentData.title} type="text" className="form-control form-control-sm my-2" required placeholder="Title" />
+                                {/* <input onChange={handleChange} name='link' value={contentData.link} type="text" className="form-control form-control-sm my-2" required placeholder="Link" /> */}
+                                {/* <textarea required className="form-control form-control-sm my-2" value={contentData.title} name="title" onChange={handleChange} id="" cols="30" rows="5" placeholder="Description"></textarea> */}
                                 <button className="btn mt-2 btn-sm btn-success float-end text-uppercase" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save mb-1"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Save</button>
                             </form>
 

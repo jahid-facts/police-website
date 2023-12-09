@@ -11,6 +11,9 @@ const HeaderNew = () => {
         // navigate(-1);
         navigate("/")
     };
+
+    const [menuTitle, setMenuTitle] = useState([]);
+
     const location = useLocation();
 
     const [divisionPoliceData, setDivisionPoliceData] = useState([]);
@@ -201,6 +204,27 @@ const HeaderNew = () => {
                 setCrimeManagementData(res.data);
             });
     }, [])
+
+    useEffect(() => {
+        const fetchTitles = async () => {
+            try {
+                const res = await fetch('http://localhost:4000/get-all-menu-title');
+
+                if (!res.ok) {
+                    throw new Error(`HTTP error! Status: ${res.status}`);
+                }
+
+                const menuData = await res.json();
+                // setTitles(data[0].title);
+                setMenuTitle(menuData.map((item, index) => item.title));
+            } catch (error) {
+                console.error('Error fetching titles:', error);
+            }
+        };
+
+        fetchTitles();
+    }, []);
+
     return (
         <div className="ht__navbar">
             <nav className="navbar navbar-expand-lg bg__body navbar-dark" >
@@ -229,7 +253,16 @@ const HeaderNew = () => {
                                         display: "block",
                                     }}
                                 >
-                                    <span>জেলা পুলিশ <i className="fa-solid fa-angle-down pl-2"></i></span>
+                                    {/* <span>জেলা পুলিশ <i className="fa-solid fa-angle-down pl-2"></i></span> */}
+                                    <span className="link-title">
+                                        {menuTitle.map((title, index) => (
+                                            <span key={index} className="link-title">
+                                                {/* {index === 0 && `${title} is index no ${index + 1}`} */}
+                                                {index === 0 && `${title}`}
+                                            </span>
+                                        ))}
+                                        <i className="fa-solid fa-angle-down pl-2"></i>
+                                    </span>
                                 </Link>
                                 <div className={`dropdown-menu drop__division`} aria-labelledby="navbarDropdown13">
                                     <div className="row">
@@ -292,10 +325,41 @@ const HeaderNew = () => {
                                         display: "block",
                                     }}
                                 >
-                                    <span>প্রশাসন <i className="fa-solid fa-angle-down pl-2"></i></span>
+                                    {/* <span>প্রশাসন <i className="fa-solid fa-angle-down pl-2"></i></span> */}
+
+                                    <span className="link-title">
+                                        {menuTitle.map((title, index) => (
+                                            <span key={index} className="link-title">
+                                                {/* {index === 0 && `${title} is index no ${index + 1}`} */}
+                                                {index === 1 && `${title}`}
+                                            </span>
+                                        ))}
+                                        <i className="fa-solid fa-angle-down pl-2"></i>
+                                    </span>
+
                                 </Link>
                                 <div className="dropdown-menu drop__administration" aria-labelledby="navbarDropdown13">
                                     <div className="row">
+
+                                        <div className="col-sm-6">
+                                            <div className="nav-item">
+                                                <Link to={`former-of-cheif-sp`} className="dropdown-item">
+                                                    <span>
+                                                        <div className="ps-2">
+                                                            <p
+                                                                style={{
+                                                                    color: '#c40a2a',
+                                                                    fontWeight: "400",
+                                                                    fontSize: "14px",
+                                                                    marginBottom: "0px",
+                                                                }}
+                                                            >সাবেক পুলিশ সুপার</p>
+                                                        </div>
+                                                    </span>
+                                                </Link>
+                                            </div>
+                                        </div>
+
                                         {
                                             adminData !== undefined && adminData?.sort((a, b) => a.index - b.index).map((item, i) => {
                                                 return (
@@ -320,42 +384,7 @@ const HeaderNew = () => {
                                                 )
                                             })
                                         }
-                                        <div className="col-sm-6">
-                                            <div className="nav-item">
-                                                <Link to={`employees`} className="dropdown-item">
-                                                    <span>
-                                                        <div className="ps-2">
-                                                            <p
-                                                                style={{
-                                                                    color: '#c40a2a',
-                                                                    fontWeight: "400",
-                                                                    fontSize: "14px",
-                                                                    marginBottom: "0px",
-                                                                }}
-                                                            >কর্মচারীবৃন্দ</p>
-                                                        </div>
-                                                    </span>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                        <div className="col-sm-6">
-                                            <div className="nav-item">
-                                                <Link to={`former-of-cheif-sp`} className="dropdown-item">
-                                                    <span>
-                                                        <div className="ps-2">
-                                                            <p
-                                                                style={{
-                                                                    color: '#c40a2a',
-                                                                    fontWeight: "400",
-                                                                    fontSize: "14px",
-                                                                    marginBottom: "0px",
-                                                                }}
-                                                            >সাবেক পুলিশ সুপার</p>
-                                                        </div>
-                                                    </span>
-                                                </Link>
-                                            </div>
-                                        </div>
+
                                         <div className="col-sm-6">
                                             <div className="nav-item">
                                                 <Link to={`officers`} className="dropdown-item">
@@ -374,6 +403,61 @@ const HeaderNew = () => {
                                                 </Link>
                                             </div>
                                         </div>
+
+                                        <div className="col-sm-6">
+                                            <div className="nav-item">
+                                                <Link to={`employees`} className="dropdown-item">
+                                                    <span>
+                                                        <div className="ps-2">
+                                                            <p
+                                                                style={{
+                                                                    color: '#c40a2a',
+                                                                    fontWeight: "400",
+                                                                    fontSize: "14px",
+                                                                    marginBottom: "0px",
+                                                                }}
+                                                            >কর্মচারীবৃন্দ</p>
+                                                        </div>
+                                                    </span>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                        {/* <div className="col-sm-6">
+                                            <div className="nav-item">
+                                                <Link to={`former-of-cheif-sp`} className="dropdown-item">
+                                                    <span>
+                                                        <div className="ps-2">
+                                                            <p
+                                                                style={{
+                                                                    color: '#c40a2a',
+                                                                    fontWeight: "400",
+                                                                    fontSize: "14px",
+                                                                    marginBottom: "0px",
+                                                                }}
+                                                            >সাবেক পুলিশ সুপার</p>
+                                                        </div>
+                                                    </span>
+                                                </Link>
+                                            </div>
+                                        </div> */}
+                                        {/* <div className="col-sm-6">
+                                            <div className="nav-item">
+                                                <Link to={`officers`} className="dropdown-item">
+                                                    <span>
+                                                        <div className="ps-2">
+                                                            <p
+                                                                style={{
+                                                                    color: '#c40a2a',
+                                                                    fontWeight: "400",
+                                                                    fontSize: "14px",
+                                                                    marginBottom: "0px",
+                                                                }}
+                                                            >কর্মকর্তাগণ</p>
+                                                        </div>
+                                                    </span>
+                                                </Link>
+                                            </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </li>
@@ -391,7 +475,18 @@ const HeaderNew = () => {
                                         color: '#098346'
                                     }}
                                 >
-                                    <span>ইউনিট সমূহ<i className="fa-solid fa-angle-down pl-2"></i></span>
+                                    {/* <span>ইউনিট সমূহ<i className="fa-solid fa-angle-down pl-2"></i></span> */}
+
+                                    <span className="link-title">
+                                        {menuTitle.map((title, index) => (
+                                            <span key={index} className="link-title">
+                                                {/* {index === 0 && `${title} is index no ${index + 1}`} */}
+                                                {index === 2 && `${title}`}
+                                            </span>
+                                        ))}
+                                        <i className="fa-solid fa-angle-down pl-2"></i>
+                                    </span>
+
                                 </Link>
                                 <div className="dropdown-menu drop__units" aria-labelledby="navbarDropdown13">
 
@@ -461,7 +556,18 @@ const HeaderNew = () => {
                                         display: "block",
                                     }}
                                 >
-                                    <span>কার্যক্রম <i className="fa-solid fa-angle-down pl-2"></i></span>
+                                    {/* <span>কার্যক্রম <i className="fa-solid fa-angle-down pl-2"></i></span> */}
+
+                                    <span className="link-title">
+                                        {menuTitle.map((title, index) => (
+                                            <span key={index} className="link-title">
+                                                {/* {index === 0 && `${title} is index no ${index + 1}`} */}
+                                                {index === 3 && `${title}`}
+                                            </span>
+                                        ))}
+                                        <i className="fa-solid fa-angle-down pl-2"></i>
+                                    </span>
+
                                 </Link>
                                 <div className="dropdown-menu drop__activities" aria-labelledby="navbarDropdown13">
                                     <div className="row g-2">
@@ -525,7 +631,18 @@ const HeaderNew = () => {
                                         display: "block",
                                     }}
                                 >
-                                    <span>সেবা <i className="fa-solid fa-angle-down pl-2"></i></span>
+                                    {/* <span>সেবা <i className="fa-solid fa-angle-down pl-2"></i></span> */}
+
+                                    <span className="link-title">
+                                        {menuTitle.map((title, index) => (
+                                            <span key={index} className="link-title">
+                                                {/* {index === 0 && `${title} is index no ${index + 1}`} */}
+                                                {index === 4 && `${title}`}
+                                            </span>
+                                        ))}
+                                        <i className="fa-solid fa-angle-down pl-2"></i>
+                                    </span>
+
                                 </Link>
                                 <div className="dropdown-menu drop__services" aria-labelledby="navbarDropdown13">
                                     <div className="row">
@@ -588,7 +705,18 @@ const HeaderNew = () => {
                                         display: 'block',
                                     }}
                                 >
-                                    <span>অপরাধ ব্যাবস্থাপনা <i className="fa-solid fa-angle-down pl-2"></i></span>
+                                    {/* <span>অপরাধ ব্যাবস্থাপনা <i className="fa-solid fa-angle-down pl-2"></i></span> */}
+
+                                    <span className="link-title">
+                                        {menuTitle.map((title, index) => (
+                                            <span key={index} className="link-title">
+                                                {/* {index === 0 && `${title} is index no ${index + 1}`} */}
+                                                {index === 5 && `${title}`}
+                                            </span>
+                                        ))}
+                                        <i className="fa-solid fa-angle-down pl-2"></i>
+                                    </span>
+
                                 </Link>
                                 <div className="dropdown-menu drop__crime__manage" aria-labelledby="navbarDropdown13">
                                     <div className="row">
@@ -632,7 +760,18 @@ const HeaderNew = () => {
                                         display: 'block',
                                     }}
                                 >
-                                    <span>নোটিশ বোর্ড <i className="fa-solid fa-angle-down pl-2"></i></span>
+                                    {/* <span>নোটিশ বোর্ড <i className="fa-solid fa-angle-down pl-2"></i></span> */}
+
+                                    <span className="link-title">
+                                        {menuTitle.map((title, index) => (
+                                            <span key={index} className="link-title">
+                                                {/* {index === 0 && `${title} is index no ${index + 1}`} */}
+                                                {index === 6 && `${title}`}
+                                            </span>
+                                        ))}
+                                        <i className="fa-solid fa-angle-down pl-2"></i>
+                                    </span>
+
                                 </Link>
                                 <div className="dropdown-menu drop__notice__board" aria-labelledby="navbarDropdown13">
                                     <div className="row">
@@ -724,7 +863,18 @@ const HeaderNew = () => {
                                         display: 'block',
                                     }}
                                 >
-                                    <span>বিট পুলিশিং  <i className="fa-solid fa-angle-down pl-2"></i></span>
+                                    {/* <span>বিট পুলিশিং  <i className="fa-solid fa-angle-down pl-2"></i></span> */}
+
+                                    <span className="link-title">
+                                        {menuTitle.map((title, index) => (
+                                            <span key={index} className="link-title">
+                                                {/* {index === 0 && `${title} is index no ${index + 1}`} */}
+                                                {index === 7 && `${title}`}
+                                            </span>
+                                        ))}
+                                        <i className="fa-solid fa-angle-down pl-2"></i>
+                                    </span>
+
                                 </Link>
                                 <div className="dropdown-menu drop__bit__policing" aria-labelledby="navbarDropdown13">
                                     <div className="row">

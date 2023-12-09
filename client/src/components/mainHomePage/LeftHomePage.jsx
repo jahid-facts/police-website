@@ -12,6 +12,9 @@ import "./LeftHomePage.css"
 const LeftHomePage = () => {
     const [digData, setDigData] = useState({});
     const [spData, setSpData] = useState([]);
+
+    // const [title, setTitle] = useState("");
+
     useEffect(() => {
         axios.get(`dig`)
             .then(res => setDigData(res.data))
@@ -72,66 +75,68 @@ const LeftHomePage = () => {
 
     const [govImportenceLinkData, setGovImportenceLinkData] = useState([]);
 
+    const [dynamicTitle, setDynamicTitle] = useState('');
+
     // useEffect(() => {
 
     //     axios.get(`important-link`)
     //         .then(res => setGovImportenceLinkData(res.data))
 
-        // Example: Fetch data from an API
-        // fetch('your_api_endpoint')
-        //   .then(response => response.json())
-        //   .then(data => setGovImportenceLinkData(data));
+    // Example: Fetch data from an API
+    // fetch('your_api_endpoint')
+    //   .then(response => response.json())
+    //   .then(data => setGovImportenceLinkData(data));
 
-        // Example: Set data dynamically
-        // const dynamicData = [
-            // {
-            //     id: 1,
-            //     image: list_icon,
-            //     title: "National Web Portal",
-            //     link: "https://bangladesh.gov.bd/index.php",
-            // },
-            // {
-            //     id: 2,
-            //     image: list_icon,
-            //     title: "MOPA",
-            //     link: "https://mopa.gov.bd/",
-            // },
-            // {
-            //     id: 3,
-            //     image: list_icon,
-            //     title: "Ministry of Home Affairs",
-            //     link: "https://mha.gov.bd/",
-            // },
-            // {
-            //     id: 4,
-            //     image: list_icon,
-            //     title: "Department of Public Safety",
-            //     link: "https://mhapsd.gov.bd/",
-            // },
-            // {
-            //     id: 5,
-            //     image: list_icon,
-            //     title: "Department of Security Services",
-            //     link: "https://ssd.gov.bd/",
-            // },
-            // {
-            //     id: 6,
-            //     image: list_icon,
-            //     title: "On Line Police Clearance",
-            //     link: "http://pcc.police.gov.bd:8080/ords/f?p=500:1::::::",
-            // },
-            // {
-            //     id: 7,
-            //     image: list_icon,
-            //     title: "Legal Instruments",
-            //     link: "https://www.police.gov.bd/en/legal_instruments",
-            // },
-            // {
-            //     id: 8,
-            //     image: list_icon,
-            //     title: "Innovative Activities",
-            //     link: "https://www.police.gov.bd/en/innovative_activities",
-            // },
+    // Example: Set data dynamically
+    // const dynamicData = [
+    // {
+    //     id: 1,
+    //     image: list_icon,
+    //     title: "National Web Portal",
+    //     link: "https://bangladesh.gov.bd/index.php",
+    // },
+    // {
+    //     id: 2,
+    //     image: list_icon,
+    //     title: "MOPA",
+    //     link: "https://mopa.gov.bd/",
+    // },
+    // {
+    //     id: 3,
+    //     image: list_icon,
+    //     title: "Ministry of Home Affairs",
+    //     link: "https://mha.gov.bd/",
+    // },
+    // {
+    //     id: 4,
+    //     image: list_icon,
+    //     title: "Department of Public Safety",
+    //     link: "https://mhapsd.gov.bd/",
+    // },
+    // {
+    //     id: 5,
+    //     image: list_icon,
+    //     title: "Department of Security Services",
+    //     link: "https://ssd.gov.bd/",
+    // },
+    // {
+    //     id: 6,
+    //     image: list_icon,
+    //     title: "On Line Police Clearance",
+    //     link: "http://pcc.police.gov.bd:8080/ords/f?p=500:1::::::",
+    // },
+    // {
+    //     id: 7,
+    //     image: list_icon,
+    //     title: "Legal Instruments",
+    //     link: "https://www.police.gov.bd/en/legal_instruments",
+    // },
+    // {
+    //     id: 8,
+    //     image: list_icon,
+    //     title: "Innovative Activities",
+    //     link: "https://www.police.gov.bd/en/innovative_activities",
+    // },
     //     ];
 
     //     setGovImportenceLinkData(dynamicData);
@@ -149,8 +154,39 @@ const LeftHomePage = () => {
             })
         axios.get(`important-link`)
             .then(res => setGovImportenceLinkData(res.data))
+
+        // axios.get(`important-link`)
+        //     .then(res => {
+        //         setGovImportenceLinkData(res.data);
+        //         setTitle(res.data.title); // Assuming title is part of your API response
+        //     })
+
         axios.get(`right-side-others`)
             .then(res => setRightOthers(res.data))
+
+        // axios.get(`right-links`)
+        //     .then(res => setDynamicTitle(res.data.title))
+    }, []);
+
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`http://localhost:4000/titles`);
+                const data = await response.json();
+                console.log(response)
+                console.log(data)
+               
+                setDynamicTitle(data[0].title); // Assuming your API returns an object with a 'title' property
+               
+            } catch (error) {
+                console.error('Error fetching title:', error);
+            }
+        };
+
+        fetchData();
+       
     }, []);
 
     return (
@@ -214,8 +250,11 @@ const LeftHomePage = () => {
                             data-hide-cover="false"
                             data-show-facepile="false">
                         </div> */}
-                        <div className="fb__page">
+                        {/* <div className="fb__page">
                             <iframe src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/Kdistrictpolice%2Ffacebook&tabs=timeline&width=270&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="100%" height="500" style={{ border: "none", overflow: "hidden", }} scrolling="no" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                        </div> */}
+                         <div className="fb__page">
+                            <iframe src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/Kdistrictpolice%2Ffacebook&tabs=timeline&width=336&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="100%" height="500" style={{ border: "none", overflow: "hidden", minWidth: "100%", width: "100%", }} scrolling="no" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                         </div>
                     </div>
                 </div>
@@ -223,7 +262,8 @@ const LeftHomePage = () => {
                     <div className="col-12">
                         <div className="home__left__content__area">
                             <div className="setup-card">
-                                <h6 className="home__left__title">গুরুত্বপূর্ণ সরকারের ওয়েব সাইট</h6>
+                                {/* <h6 className="home__left__title">গুরুত্বপূর্ণ সরকারের ওয়েব সাইট</h6> */}
+                                <h6 className="home__left__title">{dynamicTitle}</h6>
                                 <div className="home__left__content scroll-sidebar g-doc-scroll pt-2">
                                     <ul className="list-unstyled">
                                         {

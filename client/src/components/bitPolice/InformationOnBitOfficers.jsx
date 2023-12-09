@@ -11,6 +11,8 @@ const InformationOnBitOfficers = () => {
     const [selectedOption, setSelectedOption] = useState([]);
     const [options, setOptions] = useState([]);
 
+    const [currentGroupIndex, setCurrentGroupIndex] = useState(0);
+
     useEffect(() => {
         axios.get(`thana`)
             .then(res => {
@@ -23,11 +25,15 @@ const InformationOnBitOfficers = () => {
     const handleOptionChange = (event) => {
         const data = options.find((option) => parseInt(option.id) === parseInt(event.target.value));
         setSelectedOption(data.bit_officers);
+
+        setCurrentGroupIndex(0);
     };
 
     // Handler function to reset the dropdown selection
     const handleResetClick = () => {
         setSelectedOption(options[0]?.bit_officers);
+
+        setCurrentGroupIndex(0);
     };
 
     // State to manage the modal visibility
@@ -83,55 +89,78 @@ const InformationOnBitOfficers = () => {
                                             <th>পদবী</th>
                                             <th className="thana__th">নাম</th>
                                             <th>মোবাইল</th>
+                                            <th>জিমেইল</th>
                                             <th>ছবি</th>
                                             <th>অ্যাকশান</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {
-                                            selectedOption.map((item, index) => <>
-                                                {/* <tr className="tr__body" key={item.id}>*/}
-                                                <tr className={`tr__body ${index % 2 === 0 ? 'even-row' : 'odd-row'}`} key={item.id}>
+                                        {selectedOption.map((item, index) => (
+                                            <React.Fragment key={item.id}>
+                                                <tr
+                                                    style={{
+                                                        backgroundColor: index % 4 <= 0 ? '#f0f0f0' : (index % 4 === 2 ? '#f0f0f0' : '#ffffff')
+                                                    }}
+                                                >
                                                     <td>{index + 1}.</td>
                                                     <td>{item.address}</td>
                                                     <td>{item.current_address}</td>
                                                     <td>{item.designation}</td>
                                                     <td>{item.name}</td>
                                                     <td>{item.mobile}</td>
+                                                    <td>{item.email}</td>
                                                     <td className="text-center">
-                                                        {
-                                                            item.image ?
-                                                                <img src={`${imgUrl}/${item.image}`} className="img-fluid" style={{ width: '80px', height: '80px' }} alt="image" loading='lazy' />
-                                                                :
-                                                                <img src={dummyImage} className="img-fluid" style={{ width: '80px', height: '80px' }} alt="image" loading='lazy' />
-                                                        }
+                                                        {item.image ? (
+                                                            <img
+                                                                src={`${imgUrl}/${item.image}`}
+                                                                className="img-fluid"
+                                                                style={{ width: '80px', height: '80px' }}
+                                                                alt="image"
+                                                                loading="lazy"
+                                                            />
+                                                        ) : (
+                                                            <img
+                                                                src={dummyImage}
+                                                                className="img-fluid"
+                                                                style={{ width: '80px', height: '80px' }}
+                                                                alt="image"
+                                                                loading="lazy"
+                                                            />
+                                                        )}
                                                     </td>
                                                     <td className="text-center">
-                                                        {/* <button type='button' className="btn__details"
-                                                            onClick={() => handleDetailsButtonClick(item, index)}
-                                                        >Details</button> */}
                                                         <Link to={`/bit-news/${item.id}`}>
-                                                            <button type='button' className="btn__details"
+                                                            <button
+                                                                type="button"
+                                                                className="btn__details"
                                                                 onClick={() => handleDetailsButtonClick(item, index)}
-                                                            >Details</button>
+                                                            >
+                                                                Details
+                                                            </button>
                                                         </Link>
-
                                                     </td>
                                                 </tr>
-                                                {/* <tr> */}
-                                                <tr className={`tr__body ${index % 2 === 0 ? 'even-row' : 'odd-row'}`} key={`${item.id}-details`}>
-                                                    <td colSpan={8}>
+                                                <tr
+                                                    style={{
+                                                        backgroundColor: index % 4 <= 0 ? '#f0f0f0' : (index % 4 === 2 ? '#f0f0f0' : '#ffffff')
+                                                    }}
+                                                >
+                                                    <td colSpan={9}>
                                                         <div className="row g-1">
-                                                            {item?.bitNews?.slice(0, 4).map(news =>
-                                                                <div key={news.id} className="col-3">
-                                                                    <Link to={`/bit-news-details/${news.id}`} style={{ textDecoration: "none" }} >
-
+                                                            {item?.bitNews?.slice(0, 4).map((news, newsIndex) => (
+                                                                <div key={`${news.id}-${newsIndex}`} className="col-3">
+                                                                    <Link to={`/bit-news-details/${news.id}`} style={{ textDecoration: 'none' }}>
                                                                         <div className="rc__card">
                                                                             <div className="card">
                                                                                 <div className="row g-0">
                                                                                     <div className="col-4">
                                                                                         <div className="card__rc__img">
-                                                                                            <img src={`${imgUrl}/${news.image}`} className='img-fluid' alt="..." loading='lazy' />
+                                                                                            <img
+                                                                                                src={`${imgUrl}/${news.image}`}
+                                                                                                className="img-fluid"
+                                                                                                alt="..."
+                                                                                                loading="lazy"
+                                                                                            />
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="col-8">
@@ -142,19 +171,15 @@ const InformationOnBitOfficers = () => {
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-
                                                                     </Link>
-                                                                </div>)}
-
+                                                                </div>
+                                                            ))}
                                                         </div>
                                                     </td>
                                                 </tr>
-
-                                            </>)
-                                        }
-
+                                            </React.Fragment>
+                                        ))}
                                     </tbody>
-
 
                                 </table>
                             </div>

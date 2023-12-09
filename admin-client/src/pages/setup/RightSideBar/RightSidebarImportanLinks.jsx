@@ -1,6 +1,9 @@
 
 import MaterialTable from 'material-table'
 import React from 'react'
+
+// import { useParams } from 'react-router-dom';
+
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Modal from 'react-modal';
@@ -12,6 +15,9 @@ import { RoleContext } from '../../../navbar/Auth';
 export default function RightSideBarImportantLinks() {
     const userRole = useContext(RoleContext);
     const { home_page } = userRole;
+
+    // const { titleId } = useParams();
+
     const addContents = () => {
         setIsOpen(true);
     }
@@ -110,14 +116,32 @@ export default function RightSideBarImportantLinks() {
     const [headings, setHeadings] = useState([]);
     const [update, setUpdate] = useState(false);
     const [spinner, setSpinner] = useState(false);
+
+    // const [title, setTitle] = useState('');
+    // const handleSave = async () => {
+    //     try {
+    //         // Send a POST request to your backend to save the title
+    //         // await axios.post('http://localhost:4000/saveTitle', { title });
+    //         await http.post('http://localhost:4000/saveTitle', { title });
+    //         console.log('Title saved successfully!');
+    //     } catch (error) {
+    //         console.error('Error saving title:', error);
+    //     }
+    // };
+
     useEffect(() => {
         const controller = new AbortController();
         setSpinner(true);
         http.get(`important-link`)
+
+        // http.get(`important-link/${titleId}`)
             .then((res) => {
                 setData(res.data);
+                // setHeadings(res.data.headings);
                 setSpinner(false);
+                // console.log(res)
             })
+
             .catch((err) => {
                 console.log(err);
             })
@@ -125,7 +149,9 @@ export default function RightSideBarImportantLinks() {
         return () => {
             controller.abort();
         };
-    }, [update]);
+        }, [update]);
+    // }, [update, titleId]);
+
     // add modal 
     const customStyles = {
         content: {
@@ -150,6 +176,8 @@ export default function RightSideBarImportantLinks() {
     })
     const handleChange = (e) => {
         setContentData({ ...contentData, [e.target.name]: e.target.value });
+
+        // setPageTitle(e.target.value);
     }
     const submitData = (e) => {
         e.preventDefault()
@@ -180,11 +208,11 @@ export default function RightSideBarImportantLinks() {
                     })
                 })
         } else {
-            http.post('save-important-link', {title: contentData.title, link: contentData.link})
+            http.post('save-important-link', { title: contentData.title, link: contentData.link })
                 .then((res) => {
                     setUpdate(!update);
                     setIsOpen(false);
-                    setContentData({ title: "",  link: "" });
+                    setContentData({ title: "", link: "" });
                     Swal.fire({
                         position: 'top-center',
                         icon: 'success',
@@ -212,10 +240,16 @@ export default function RightSideBarImportantLinks() {
         setIsOpen(false);
         setContentData({ title: "", link: "" });
     }
+    console.log(headings)
     return (
         <div className='page-content adjustment-type-table'>
             <div className="custom-card p-2 d-flex justify-content-between mb-2 align-items-center">
                 <h6>Important Links</h6>
+
+                {/* <label>Title:</label>
+                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                <button onClick={handleSave}>Save Title</button> */}
+
                 <div>
                     <button style={{ marginTop: "1px" }} onClick={addContents} className='btn btn-sm btn-primary float-end'>Add</button>
                 </div>

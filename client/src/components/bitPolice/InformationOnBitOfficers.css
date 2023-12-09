@@ -1,15 +1,13 @@
-/* Add this style to your existing CSS or create a new CSS file */
-.tr__body:nth-child(even) td {
-    background-color: #ffffff;
-    /* background-color: #c7c2c2; */
-    /* Background color for even rows */
+.card {
+    transition: 1s all ease;
 }
 
-.tr__body:nth-child(odd) td {
-    /* background-color: #ffffff; */
-    background-color: #EDEFF0;
-    /* Background color for odd rows */
+.card:hover {
+    background-color: #cae1f3 !important;
+    /* color: white; */
 }
+
+
 
 .thana__table thead tr th {
     text-align: center;

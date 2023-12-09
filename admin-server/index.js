@@ -4,7 +4,7 @@ const app = express()
 const cors = require('cors');
 app.use(cors());
 const port = 4000
-app.use(express.json({limit: '50mb'}));
+app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 const newsRouter = require('./routes/news.route');
@@ -51,6 +51,11 @@ const exPoliceSuperRouter = require('./routes/exPoliceSuper.route');
 const visitorCounterRouter = require('./routes/visitorCounter.route');
 const importantLinksRouter = require('./routes/importantLinks.route');
 const rightOthersRouter = require('./routes/rightSidebarOthers.route');
+
+const menuItemRouter = require('./routes/menuItem.route')
+const menuBarRouter = require('./routes/menuBar.route');
+const rightSideRouter = require('./routes/rightSide.route');
+
 const footerButtonLinkRouter = require('./routes/footerButtonLinks.route');
 const contactRouter = require('./routes/contactAddress.route');
 const contactPersonRouter = require('./routes/contactPerson.route');
@@ -100,6 +105,11 @@ app.use(exPoliceSuperRouter);
 app.use(visitorCounterRouter);
 app.use(importantLinksRouter);
 app.use(rightOthersRouter);
+
+app.use(menuItemRouter);
+app.use(menuBarRouter);
+app.use(rightSideRouter);
+
 app.use(footerButtonLinkRouter);
 app.use(contactRouter);
 app.use(contactPersonRouter);

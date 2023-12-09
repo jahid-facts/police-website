@@ -2,6 +2,9 @@
 
 import MaterialTable from 'material-table'
 import React, { useContext, useRef } from 'react'
+
+// import { useParams } from 'react-router-dom';
+
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Modal from 'react-modal';
@@ -14,6 +17,9 @@ import JoditEditor from 'jodit-react';
 export default function Sp() {
     const userRole = useContext(RoleContext);
     const { home_page } = userRole;
+
+    // const { titleId } = useParams();
+
     // text editor
     const editor = useRef(null);
     const [content, setContent] = useState('');
@@ -47,6 +53,9 @@ export default function Sp() {
         setSpinner(true);
         http
             .get(`police-super`)
+
+        // http
+        //     .get(`police-super/${titleId}`)
             .then((res) => {
                 if (res.data) {
                     setData(res.data)
@@ -61,7 +70,9 @@ export default function Sp() {
         return () => {
             controller.abort();
         };
-    }, [update]);
+        }, [update]);
+
+    // }, [update, titleId]);
 
     const customStyles = {
         content: {

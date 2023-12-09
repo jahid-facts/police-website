@@ -6,7 +6,8 @@ const fs = require('fs');
 const bcrypt = require('bcrypt');
 const prisma = new PrismaClient();
 exports.getBitOfficers = async (req, res) => {
-  const bitOfficer = await prisma.Bit_Officers.findMany({
+  // const bitOfficer = await prisma.Bit_Officers.findMany({
+    const bitOfficer = await prisma.bit_Officers.findMany({
     include: {
       thana: true,
       bitNews: true
@@ -20,7 +21,8 @@ exports.getBitOfficers = async (req, res) => {
 exports.getTotalBitOfficers = async (req, res) => {
 
   try {
-    const bitOfficerCount = await prisma.Bit_Officers.count();
+    // const bitOfficerCount = await prisma.Bit_Officers.count();
+    const bitOfficerCount = await prisma.bit_Officers.count();
     res.json({ bitOfficerCount });
     console.log(bitOfficerCount)
   } catch (error) {
@@ -31,7 +33,8 @@ exports.getTotalBitOfficers = async (req, res) => {
 
 
 exports.getBitOfficersOnly = async (req, res) => {
-  const bitOfficer = await prisma.Bit_Officers.findMany({});
+  // const bitOfficer = await prisma.Bit_Officers.findMany({});
+  const bitOfficer = await prisma.bit_Officers.findMany({});
   res.json(bitOfficer)
 }
 
@@ -52,7 +55,8 @@ const upload = multer({
 }).single("image");
 
 exports.getSingleBitOfficers = async (req, res) => {
-  const bitOfficer = await prisma.Bit_Officers.findUnique({
+  // const bitOfficer = await prisma.Bit_Officers.findUnique({
+    const bitOfficer = await prisma.bit_Officers.findUnique({
     where: {
       id: Number(req.params.id),
     },
@@ -77,7 +81,8 @@ exports.saveBitOfficers = async (req, res) => {
     const image = req?.file?.filename ? req?.file?.filename : null;
 
     try {
-      const bitOfficer = await prisma.Bit_Officers.create({
+      // const bitOfficer = await prisma.Bit_Officers.create({
+        const bitOfficer = await prisma.bit_Officers.create({
         data: {
           name,
           email,
@@ -120,7 +125,9 @@ exports.saveBitOfficers = async (req, res) => {
 exports.updateBitOfficers = async (req, res) => {
   const bitOfficerId = Number(req.params.id);
   try {
-    const existingBitOfficers = await prisma.Bit_Officers.findUnique({ where: { id: bitOfficerId } });
+    // const existingBitOfficers = await prisma.Bit_Officers.findUnique({ where: { id: bitOfficerId } });
+    
+    const existingBitOfficers = await prisma.bit_Officers.findUnique({ where: { id: bitOfficerId } });
 
     if (!existingBitOfficers) {
       return res.status(404).json({ error: 'BitOfficers not found' });
@@ -144,7 +151,8 @@ exports.updateBitOfficers = async (req, res) => {
 
       // Update bitOfficer with new image
       const { name, email, fax, address, current_address, location, mobile, phone, thanaId, designation, } = req.body;
-      const updatedBitOfficers = await prisma.Bit_Officers.update({
+      // const updatedBitOfficers = await prisma.Bit_Officers.update({
+        const updatedBitOfficers = await prisma.bit_Officers.update({
         where: { id: bitOfficerId },
         data: {
           name,
@@ -170,7 +178,8 @@ exports.updateBitOfficers = async (req, res) => {
 };
 
 exports.deleteBitOfficers = async (req, res) => {
-  const bitOfficer = await prisma.Bit_Officers.delete({
+  // const bitOfficer = await prisma.Bit_Officers.delete({
+    const bitOfficer = await prisma.bit_Officers.delete({
     where: {
       id: Number(req.params.id),
     }
