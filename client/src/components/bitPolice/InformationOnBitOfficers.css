@@ -1,9 +1,13 @@
+/* .col-8 {
+    background: #cae1f3
+} */
+
 .card {
     transition: 1s all ease;
 }
 
 .card:hover {
-    background-color: #cae1f3 !important;
+    background-color: #ffffff !important;
     /* color: white; */
 }
 
@@ -15,5 +19,5 @@
     font-size: 15px;
     font-weight: 500;
     background: #1d7008;
-    color: #eeeaea;
+    color: #eeeaea
 }

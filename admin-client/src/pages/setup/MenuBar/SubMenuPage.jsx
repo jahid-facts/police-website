@@ -1,24 +1,17 @@
+// SubMenuPage.js
 import MaterialTable from 'material-table'
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
-
-import { Outlet, useParams } from 'react-router-dom';
-
 import Modal from 'react-modal';
 import Swal from 'sweetalert2';
 import http from '../../../http';
 import { useContext } from 'react';
 import { RoleContext } from '../../../navbar/Auth';
 
-export default function DynamicLink() {
+export default function SubMenuPage() {
     const userRole = useContext(RoleContext);
     const { home_page } = userRole;
-
-    const { title } = useParams();
-    const decodedTitle = decodeURIComponent(title);
-
-
     const addContents = () => {
         setIsOpen(true);
     }
@@ -34,7 +27,7 @@ export default function DynamicLink() {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    http.delete(`delete-menu-title/${id}`)
+                    http.delete(`delete-sub-menu-item/${id}`)
                         .then((res) => {
                             setUpdate(!update);
                             setIsOpen(false);
@@ -51,7 +44,7 @@ export default function DynamicLink() {
             })
     }
     const editData = (id) => {
-        http.get(`get-single-menu-title/${id}`)
+        http.get(`get-single-sub-menu-item/${id}`)
             .then((res) => {
                 setContentData(res.data);
                 setIsOpen(true);
@@ -121,7 +114,7 @@ export default function DynamicLink() {
     useEffect(() => {
         const controller = new AbortController();
         setSpinner(true);
-        http.get(`get-all-menu-title`)
+        http.get(`get-all-sub-menu-item`)
             .then((res) => {
                 setData(res.data);
                 // setHeadings(res.data.headings);
@@ -166,7 +159,7 @@ export default function DynamicLink() {
     const submitData = (e) => {
         e.preventDefault()
         if (contentData.id) {
-            http.put(`update-menu-title/${contentData.id}`, contentData)
+            http.put(`update-sub-menu-item/${contentData.id}`, contentData)
                 .then((res) => {
                     setUpdate(!update);
                     setIsOpen(false);
@@ -192,7 +185,7 @@ export default function DynamicLink() {
                     })
                 })
         } else {
-            http.post('create-menu-title', { title: contentData.title })
+            http.post('create-sub-menu-item-title', { title: contentData.title })
                 .then((res) => {
                     setUpdate(!update);
                     setIsOpen(false);
@@ -225,12 +218,11 @@ export default function DynamicLink() {
         // setContentData({ title: "", link: "" });
         setContentData({ title: "" });
     }
-    console.log(data)
+    console.log(headings)
     return (
         <div className='page-content adjustment-type-table'>
             <div className="custom-card p-2 d-flex justify-content-between mb-2 align-items-center">
-                {/* <h2>{decodedTitle}</h2> */}
-                <h6>Menu Bar Title</h6>
+                <h6>Sub-title</h6>
 
                 {/* <label>Title:</label>
                 <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -281,8 +273,47 @@ export default function DynamicLink() {
                     </div>
                 </div>
             </Modal>
-
-            <Outlet />
         </div>
     )
 }
+
+
+// import React, { useEffect, useState } from 'react';
+// import http from '../../../http';
+
+// const SubMenuPage = ({ title, subtitle }) => {
+//     const [content, setContent] = useState({});
+
+//     useEffect(() => {
+//         // Fetch content based on title and subtitle
+//         const fetchData = async () => {
+//             try {
+//                 const response = await http.get(`http://localhost:4000/${title}/${subtitle || ''}`);
+//                 setContent(response.data);
+//             } catch (error) {
+//                 console.error('Error fetching content:', error);
+//             }
+//         };
+
+//         fetchData();
+//     }, [title, subtitle]);
+
+//     return (
+//         <div>
+//             <h2>{title}</h2>
+//             {subtitle && <h3>{subtitle}</h3>}
+//             {/* Render specific properties from the content object */}
+//             <div>
+//                 <p>ID: {content.id}</p>
+//                 <p>Notice ID: {content.noticeId}</p>
+//                 <p>Category ID: {content.categoryId}</p>
+//                 <p>Category: {content.category}</p>
+//                 <p>Notice: {content.notice}</p>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default SubMenuPage;
+
+

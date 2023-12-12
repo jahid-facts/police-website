@@ -39,13 +39,14 @@ model Bottom_News {
 }
 
 model Menu {
-  id       Int      @id @default(autoincrement())
-  title    String   @db.VarChar(255)
-  parentId Int?
-  parent   Menu?    @relation("ChildToParent", fields: [parentId], references: [id])
-  children Menu[]   @relation("ChildToParent")
+  id        Int      @id @default(autoincrement())
+  title     String
+  parentId  Int?
+  parent    Menu?    @relation("ChildToParent", fields: [parentId], references: [id])
+  children  Menu[]   @relation("ChildToParent")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  dynamicMenus Dynamic_Menu[] @relation("MenuToDynamicMenu")
 }
 
 model Dynamic_Menu {
@@ -53,7 +54,14 @@ model Dynamic_Menu {
   title     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  menu_id   Int
+  menu      Menu     @relation("MenuToDynamicMenu", fields: [menu_id], references: [id])
 }
+
+
+
+
+
 
 model Recent_Activity {
   id        Int      @id @default(autoincrement())

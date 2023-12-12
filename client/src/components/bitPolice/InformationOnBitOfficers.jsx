@@ -99,7 +99,7 @@ const InformationOnBitOfficers = () => {
                                             <React.Fragment key={item.id}>
                                                 <tr
                                                     style={{
-                                                        backgroundColor: index % 4 <= 0 ? '#f0f0f0' : (index % 4 === 2 ? '#f0f0f0' : '#ffffff')
+                                                        backgroundColor: index % 4 <= 0 ? '#b0eacd' : (index % 4 === 2 ? '#b0eacd' : '#f1f1f1')
                                                     }}
                                                 >
                                                     <td>{index + 1}.</td>
@@ -140,10 +140,11 @@ const InformationOnBitOfficers = () => {
                                                         </Link>
                                                     </td>
                                                 </tr>
+
                                                 <tr
                                                     style={{
-                                                        backgroundColor: index % 4 <= 0 ? '#f0f0f0' : (index % 4 === 2 ? '#f0f0f0' : '#ffffff')
-                                                    }}
+                                                        backgroundColor: index % 4 <= 0 ? '#b0eacd' : (index % 4 === 2 ? '#b0eacd' : '#f1f1f1'),
+                                                        borderTop: "2px solid #fff" }}
                                                 >
                                                     <td colSpan={9}>
                                                         <div className="row g-1">
@@ -151,7 +152,7 @@ const InformationOnBitOfficers = () => {
                                                                 <div key={`${news.id}-${newsIndex}`} className="col-3">
                                                                     <Link to={`/bit-news-details/${news.id}`} style={{ textDecoration: 'none' }}>
                                                                         <div className="rc__card">
-                                                                            <div className="card">
+                                                                            <div className="card" style={{ background: '#cae1f3'}}>
                                                                                 <div className="row g-0">
                                                                                     <div className="col-4">
                                                                                         <div className="card__rc__img">

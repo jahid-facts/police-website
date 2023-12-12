@@ -64,6 +64,7 @@ import ContactPerson from '../pages/setup/Contact/ContactPerson';
 
 import DynamicLink from '../pages/setup/Dynamic Link/DynamicLink';
 import MenuBar from '../pages/setup/MenuBar/MenuBar';
+import SubMenuPage from '../pages/setup/MenuBar/SubMenuPage';
 
 export const RoleContext = createContext();
 
@@ -73,7 +74,7 @@ const Auth = () => {
     const location = useLocation();
 
     const [menuTitle, setMenuTitle] = useState([]);
-    const [titles, setTitles] = useState([]);
+    const [subTitle, setSubTitles] = useState([]);
 
     const [userRole, setUserRole] = useState({
         home_page: [],
@@ -99,7 +100,7 @@ const Auth = () => {
         const fetchTitles = async () => {
             try {
                 const res = await fetch('http://localhost:4000/get-all-menu-title');
-                const response = await fetch('http://localhost:4000/titles');
+                const response = await fetch('http://localhost:4000/get-all-sub-menu-item');
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -109,7 +110,7 @@ const Auth = () => {
                 const data = await response.json();
 
                 setMenuTitle(menuData);
-                setTitles(data);
+                setSubTitles(data);
 
             } catch (error) {
                 console.error('Error fetching titles:', error);
@@ -228,7 +229,41 @@ const Auth = () => {
                                 <Route path="/crime-management" element={<CrimeManagement />} />
                                 <Route path="/bit-news" element={<BitPolicingNews />} />
 
+                                {/* <Route path="/menu-bar-title" element={<MenuBar />} />
+                                {menuTitle.map((title) => (
+                                    <Route
+                                        key={title.id}
+                                        path={`/menu-bar/${title.id}`}
+                                        element={<SubMenuPage title={title.id} />}
+                                    />
+                                ))} */}
+
                                 <Route path="/menu-bar-title" element={<MenuBar />} />
+                                {menuTitle.map((title) => (
+                                    <Route
+                                        key={title.title}
+                                        path={`/menu-bar/${encodeURIComponent(title.title)}`}
+                                        element={<SubMenuPage title={title.title} />}
+                                    />
+                                ))}
+
+                                {/* {menuTitle && menuTitle.map((title) => (
+                                    <React.Fragment key={title.title}>
+                                        <Route
+                                            path={`/menu-bar/${title.title}`}
+                                            element={<MenuBar title={title.title} subtitle={null} />}
+                                        />
+
+                                        {title.subMenu && title.subMenu.map((subTitle) => (
+                                            <Route
+                                                key={`${title.title}-${subTitle.title}`}
+                                                path={`/menu-bar/${title.title}/${subTitle.title}`}
+                                                element={<SubMenuPage title={title.title} subtitle={subTitle.title} />}
+                                            />
+                                        ))}
+                                    </React.Fragment>
+                                ))} */}
+
                             </>
                         }
                         {

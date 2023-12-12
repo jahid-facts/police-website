@@ -4,44 +4,30 @@ const prisma = new PrismaClient();
 
 // Create a root menu item
 exports.createMenu = async (req, res) => {
-    const rootMenu = await prisma.Menu.create({
-        data: {
-            title: 'Root Menu Item',
-        },
-    });
-    res.json(rootMenu);
-}
-
-// Create submenus under the root menu
-exports.createSubMenu1 = async (req, res) => {
-    const subMenu1 = await prisma.Menu.create({
-        data: {
-            title: 'Submenu 1',
-            parentId: rootMenu.id,
-        },
-    });
-    res.json(subMenu1)
-}
-
-exports.createSubMenu2 = async (req, res) => {
-    subMenu2 = await prisma.Menu.create({
-        data: {
-            title: 'Submenu 2',
-            parentId: rootMenu.id,
-        },
-    });
-    res.json(subMenu2)
+    try {
+        const { title, menu_id } = req.body;
+        const dynamicMenu = await prisma.dynamic_Menu.create({
+            data: {
+                title,
+                menu: { connect: { id: menu_id } }, // Provide the menu_id to connect to the associated Menu
+            },
+        });
+        res.json(dynamicMenu);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 }
 
 // Get all menus and submenus
 exports.getAllMenuTitle = async (req, res) => {
-    const allMenus = await prisma.Menu.findMany({
-        include: {
-            children: true,
-        },
-    });
-    res.json(allMenus)
-    console.log('All Menus:', allMenus);
+    try {
+        const dynamicMenus = await prisma.dynamic_Menu.findMany();
+        res.json(dynamicMenus);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 }
 
 
@@ -49,42 +35,56 @@ exports.getAllMenuTitle = async (req, res) => {
 
 // Query the root menu with its submenus
 exports.getSingleMenu = async (req, res) => {
-    const menuWithSubmenus = await prisma.Menu.findUnique({
-        where: {
-            id: rootMenu.id,
-        },
-        include: {
-            children: true,
-        },
-    });
-    res.json(menuWithSubmenus);
-    console.log('Menu with Submenus:', menuWithSubmenus);
+    try {
+        const { id } = req.params;
+        const dynamicMenu = await prisma.dynamic_Menu.findUnique({
+            where: { id: parseInt(id) },
+        });
+
+        if (!dynamicMenu) {
+            return res.status(404).json({ error: 'Dynamic_Menu not found' });
+        }
+
+        res.json(dynamicMenu);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 }
 
 
 
 exports.editMenu = async (req, res) => {
-    const updatedMenu = await prisma.Menu.update({
-        where: {
-            id: rootMenu.id,
-        },
-        data: {
-            title: 'Updated Root Menu',
-        },
-    });
-    res.json(updatedMenu)
-    console.log('Updated Menu:', updatedMenu);
+    try {
+        const { id } = req.params;
+        const { title, menu_id } = req.body;
+
+        const updatedDynamicMenu = await prisma.dynamic_Menu.update({
+            where: { id: parseInt(id) },
+            data: { title, menu_id },
+        });
+
+        res.json(updatedDynamicMenu);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 }
 
 // Delete the root menu and its submenus
 exports.deleteMenuTitle = async (req, res) => {
-    const deletedMenu = await prisma.Menu.delete({
-        where: {
-            id: rootMenu.id,
-        },
-    });
-    res.json(deletedMenu)
-    console.log('Deleted Menu:', deletedMenu);
+    try {
+        const { id } = req.params;
+
+        await prisma.dynamic_Menu.delete({
+            where: { id: parseInt(id) },
+        });
+
+        res.json({ message: 'Dynamic_Menu deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 }
 
 
