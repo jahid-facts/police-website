@@ -60,6 +60,177 @@ model Dynamic_Menu {
 
 
 
+model MainMenu {
+  id        Int      @id @default(autoincrement())
+  title     String
+  mega_menu Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  subMenu   SubMenu[] @relation(name: "SubMenuToMainMenu")
+}
+
+model SubMenu {
+  id          Int      @id @default(autoincrement())
+  title       String
+  mainMenuId  Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  mainMenu    MainMenu? @relation(name: "SubMenuToMainMenu", fields: [mainMenuId], references: [id])
+}
+
+
+
+model Category_Title {
+  id          Int      @id @default(autoincrement()) 
+  title       String
+  subtitle    Category_Subtitle[]
+  index       Int?
+  status      String?
+  content     String?  @db.LongText
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Category_Subtitle {
+  id          Int      @id @default(autoincrement())
+  titleId     Int
+  title       Category_Title   @relation(fields:[titleId], references: [id], onDelete: Cascade)
+  pages       Category_Subtitle_Pages[]
+  index       Int?
+  status      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Category_Subtitle_Pages {
+  id          Int      @id @default(autoincrement())
+  subtitleId  Int
+  subtitle    Category_Subtitle @relation(fields:[subtitleId], references: [id], onDelete: Cascade)
+  subpages    Category_Subtitle_Subpages[]
+  index       Int?
+  status      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Category_Subtitle_Subpages {
+  id          Int     @id @default(autoincrement())
+  pagesId     Int
+  pages       Category_Subtitle_Pages @relation(fields:[pagesId], references: [id], onDelete: Cascade)
+  subsequence    Category_Subsequence[]
+  name        String?
+  designation String?
+  mobile      String?
+  phone       String?
+  bcs_batch   String?
+  location    String?
+  image       String?
+  address     String?
+  current_address   String?
+  office      String?
+  fax         String?
+  email       String?
+  from_date   String?
+  to_date     String?
+  index       Int?
+  status      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Category_Subsequence {
+  id          Int      @id @default(autoincrement())
+  subpagesId  Int
+  subpages    Category_Subtitle_Subpages @relation(fields:[subpagesId], references: [id], onDelete: Cascade)
+  title       String?
+  image       String?
+  index       Int?
+  status      String?
+  content     String?  @db.LongText
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+
+
+
+model Title {
+  id          Int      @id @default(autoincrement()) 
+  title       String
+  subtitle    Subtitle[]
+  index       Int?
+  status      String?
+  content     String?  @db.LongText
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Subtitle {
+  id          Int      @id @default(autoincrement())
+  title       String
+  titleId     Int
+  titles      Title   @relation(fields:[titleId], references: [id], onDelete: Cascade)
+  pages       Subtitle_Pages[]
+  index       Int?
+  status      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Subtitle_Pages {
+  id          Int      @id @default(autoincrement())
+  title       String
+  subtitleId  Int
+  subtitle    Subtitle @relation(fields:[subtitleId], references: [id], onDelete: Cascade)
+  subpages    Subtitle_Subpages[]
+  index       Int?
+  status      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Subtitle_Subpages {
+  id          Int     @id @default(autoincrement())
+  pagesId     Int
+  pages       Subtitle_Pages @relation(fields:[pagesId], references: [id], onDelete: Cascade)
+  subsequence    Subsequence[]
+  name        String?
+  designation String?
+  mobile      String?
+  phone       String?
+  bcs_batch   String?
+  location    String?
+  image       String?
+  address     String?
+  current_address   String?
+  office      String?
+  fax         String?
+  email       String?
+  from_date   String?
+  to_date     String?
+  index       Int?
+  status      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Subsequence {
+  id          Int      @id @default(autoincrement())
+  subpagesId  Int
+  subpages    Subtitle_Subpages @relation(fields:[subpagesId], references: [id], onDelete: Cascade)
+  title       String?
+  image       String?
+  index       Int?
+  status      String?
+  content     String?  @db.LongText
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+
+
+
+
 
 
 

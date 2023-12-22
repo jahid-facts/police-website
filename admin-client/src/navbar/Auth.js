@@ -66,6 +66,16 @@ import DynamicLink from '../pages/setup/Dynamic Link/DynamicLink';
 import MenuBar from '../pages/setup/MenuBar/MenuBar';
 import SubMenuPage from '../pages/setup/MenuBar/SubMenuPage';
 
+import SubSubMenuPage from '../pages/setup/MenuBar/SubSubMenuPage'
+
+
+
+import Title from '../pages/setup/Menu dynamic/Title';
+import SubTitle from '../pages/setup/Menu dynamic/SubTitle';
+import SubTitlePages from '../pages/setup/Menu dynamic/SubTitlePages';
+import SubTitleSubPages from '../pages/setup/Menu dynamic/SubTitleSubPages';
+import SubSequence from '../pages/setup/Menu dynamic/SubSequence';
+
 export const RoleContext = createContext();
 
 const Auth = () => {
@@ -94,7 +104,7 @@ const Auth = () => {
             })
         })
     }, [user.id, location]);
-    console.log(userRole)
+    // console.log(userRole)
 
     useEffect(() => {
         const fetchTitles = async () => {
@@ -119,6 +129,8 @@ const Auth = () => {
 
         fetchTitles();
     }, []);
+
+
 
     return (
         <RoleContext.Provider value={userRole}>
@@ -199,8 +211,10 @@ const Auth = () => {
                                 <Route path="/contact-person" element={<ContactPerson />} />
                             </>
                         }
+
                         {
                             userRole.administration.length > 0 &&
+
                             <>
                                 <Route path="/zilla-police-pages" element={<ZillaPolicePages />} />
                                 <Route path="/zilla-police-sub-pages" element={<ZillaPoliceSubPage />} />
@@ -229,39 +243,75 @@ const Auth = () => {
                                 <Route path="/crime-management" element={<CrimeManagement />} />
                                 <Route path="/bit-news" element={<BitPolicingNews />} />
 
-                                {/* <Route path="/menu-bar-title" element={<MenuBar />} />
-                                {menuTitle.map((title) => (
-                                    <Route
-                                        key={title.id}
-                                        path={`/menu-bar/${title.id}`}
-                                        element={<SubMenuPage title={title.id} />}
-                                    />
-                                ))} */}
+
+                                <Route path="/menu-title" element={<Title />} />
+                                <Route path="/menu-sub-title" element={<SubTitle />} />
+                                <Route path="/menu-sub-title-pages" element={<SubTitlePages />} />
+                                <Route path="/menu-sub-title-sub-pages" element={<SubTitleSubPages />} />
+                                <Route path="/menu-sub-sequences" element={<SubSequence />} />
+
 
                                 <Route path="/menu-bar-title" element={<MenuBar />} />
+                                {/* <Route path="/menu-bar-title" element={<SubSubMenuPage />} /> */}
+
+                                {/* Add a route for titles and sub-titles */}
+                                {menuTitle.map((title) => (
+                                    <React.Fragment key={title.title}>
+                                        <Route
+                                            path={`/menu-bar/${encodeURIComponent(title.title)}`}
+                                            element={<SubMenuPage titleId={title.id} />}
+                                        // element={<SubMenuPage title={title.title} />}
+                                        // element={<MenuBar title={title.title} />}
+                                        />
+
+                                        {subTitle.map((title) => (
+                                            <Route
+                                                path={`/menu-bar/${encodeURIComponent(title.title)}/${encodeURIComponent(title.title)}`}
+                                                element={<SubSubMenuPage titleId={title.id} />}
+                                            />
+                                        ))}
+
+                                        {/* {title.subMenu && title.subMenu.map((subTitle) => (
+                                        // {title.map((subTitle) => (
+                                            <Route
+                                                key={subTitle.title}
+                                                path={`/menu-bar/${encodeURIComponent(title.title)}/${encodeURIComponent(subTitle.title)}`}
+                                                element={<SubSubMenuPage subTitle={subTitle.title} />}
+                                            />
+                                        ))} */}
+                                    </React.Fragment>
+                                ))}
+
+
+
+
+                                {/* <Route path="/menu-bar-title" element={<MenuBar />} />
+                                {menuTitle.map((title) => (
+                                    <React.Fragment key={title.title}>
+                                        <Route
+                                            path={`/menu-bar/${encodeURIComponent(title.title)}`}
+                                            element={<SubMenuPage title={title.title} />}
+                                        />
+                                        {title.subMenu && title.subMenu.map((subTitle) => (
+                                            <Route
+                                                key={subTitle.title}
+                                                path={`/menu-bar/${encodeURIComponent(title.title)}/${encodeURIComponent(subTitle.title)}`}
+                                                element={<SubMenuPage subTitle={subTitle.title} />}
+                                            />
+                                        ))}
+                                    </React.Fragment>
+                                ))} */}
+
+
+
+
+                                {/* <Route path="/menu-bar-title" element={<MenuBar />} />
                                 {menuTitle.map((title) => (
                                     <Route
                                         key={title.title}
                                         path={`/menu-bar/${encodeURIComponent(title.title)}`}
                                         element={<SubMenuPage title={title.title} />}
                                     />
-                                ))}
-
-                                {/* {menuTitle && menuTitle.map((title) => (
-                                    <React.Fragment key={title.title}>
-                                        <Route
-                                            path={`/menu-bar/${title.title}`}
-                                            element={<MenuBar title={title.title} subtitle={null} />}
-                                        />
-
-                                        {title.subMenu && title.subMenu.map((subTitle) => (
-                                            <Route
-                                                key={`${title.title}-${subTitle.title}`}
-                                                path={`/menu-bar/${title.title}/${subTitle.title}`}
-                                                element={<SubMenuPage title={title.title} subtitle={subTitle.title} />}
-                                            />
-                                        ))}
-                                    </React.Fragment>
                                 ))} */}
 
                             </>

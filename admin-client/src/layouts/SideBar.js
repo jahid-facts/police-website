@@ -15,7 +15,7 @@ export default function SideBar() {
   const location = useLocation();
 
   const [menuTitle, setMenuTitle] = useState([]);
-  const [subTitle, setSubTitle] = useState([]);
+  // const [subTitle, setSubTitle] = useState([]);
 
   // const [selectedComponent, setSelectedComponent] = useState(''); // Default to an empty string or the default component name
   // const navigate = useNavigate();
@@ -52,17 +52,17 @@ export default function SideBar() {
     const fetchTitles = async () => {
       try {
         const res = await fetch('http://localhost:4000/get-all-menu-title');
-        const response = await fetch('http://localhost:4000/get-all-sub-menu-item');
+        // const response = await fetch('http://localhost:4000/get-all-sub-menu-item');
 
         if (!res.ok) {
           throw new Error(`HTTP error! Status: ${res.status}`);
         }
 
         const menuData = await res.json();
-        const data = await response.json();
+        // const data = await response.json();
 
         setMenuTitle(menuData);
-        setSubTitle(data)
+        // setSubTitle(data)
 
         // setMenuTitle(menuData.map((item, index) => item.title));
       } catch (error) {
@@ -72,6 +72,9 @@ export default function SideBar() {
 
     fetchTitles();
   }, []);
+
+
+
 
   return (
     <div className="sidebar-style">
@@ -548,7 +551,106 @@ export default function SideBar() {
             {
               userRole.administration.length > 0 &&
               <>
+
+
                 <li
+                  class={`nav-item ${location.pathname === "/menu-title" ||
+                    location.pathname === "/menu-sub-title" || location.pathname === "/menu-sub-title-pages"
+                    || location.pathname === "/menu-sub-title-sub-pages" || location.pathname === "/menu-sub-sequences"
+                    ? "active"
+                    : ""
+                    }`}
+                >
+                  <a
+                    class="nav-link"
+                    data-bs-toggle="collapse"
+                    href="#menu-title"
+                    role="button"
+                    aria-expanded={`${location.pathname === "/menu-title" ||
+                      location.pathname === "/menu-sub-title" || location.pathname === "/menu-sub-title-pages"
+                      || location.pathname === "/menu-sub-title-sub-pages" || location.pathname === "/menu-sub-sequences"
+                      ? "true"
+                      : ""
+                      }`}
+                    aria-controls="/menu-title"
+                  >
+                    <FiUnlock className="link-icon" />
+                    <span class="link-title"> Menu Bar </span>
+
+                    < FiChevronDown className="link-arrow" />
+                  </a>
+                  <div
+                    class={`collapse ${location.pathname === "/menu-title" ||
+                      location.pathname === "/menu-sub-title" || location.pathname === "/menu-sub-title-pages"
+                      || location.pathname === "/menu-sub-title-sub-pages" || location.pathname === "/menu-sub-sequences"
+                      ? "show"
+                      : ""
+                      }`}
+                    id="menu-title"
+                  >
+                    <ul class="nav sub-menu">
+                      <li className="nav-item">
+                        <Link
+                          to="/menu-title"
+                          className={`nav-link ${location.pathname === "/menu-title"
+                            ? "active"
+                            : ""
+                            }`}
+                        >
+                          Title
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link
+                          to="/menu-sub-title"
+                          className={`nav-link ${location.pathname === "/menu-sub-title"
+                            ? "active"
+                            : ""
+                            }`}
+                        >
+                          Sub Title
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link
+                          to="/menu-sub-title-pages"
+                          className={`nav-link ${location.pathname === "/menu-sub-title-pages"
+                            ? "active"
+                            : ""
+                            }`}
+                        >
+                          Pages
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link
+                          to="/menu-sub-title-sub-pages"
+                          className={`nav-link ${location.pathname === "/menu-sub-title-sub-pages"
+                            ? "active"
+                            : ""
+                            }`}
+                        >
+                          Sub Pages
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link
+                          to="/menu-sub-sequences"
+                          className={`nav-link ${location.pathname === "/menu-sub-sequences"
+                            ? "active"
+                            : ""
+                            }`}
+                        >
+                          Sub Sequences
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+
+
+                {/* <li
                   class={`nav-item ${location.pathname === "/menu-bar-title"
                     ? "active"
                     : ""
@@ -576,6 +678,7 @@ export default function SideBar() {
                       }`}
                     id="menu-bar-title"
                   >
+
                     <ul className="nav sub-menu">
                       <Link
                         to="/menu-bar-title"
@@ -589,34 +692,19 @@ export default function SideBar() {
 
                       <ul class="nav sub-menu">
                         {menuTitle.map((title) => (
-                          // <li className="nav-item" key={title.id}>
                           <li className="nav-item" key={title.title}>
                             <Link
-                              // // to={`/menu-bar-/${title.id}`}
-                              // to={`/menu-bar/${title.title}`}
-                              // // className={`nav-link ${location.pathname === `/menu-bar-/${title.id}` ? "active" : ""}`}
-                              // className={`nav-link ${location.pathname === `/menu-bar/${title.title}` ? "active" : ""}`}
-
                               to={`/menu-bar/${encodeURIComponent(title.title)}`}
                               className={`nav-link ${location.pathname === `/menu-bar/${encodeURIComponent(title.title)}`
                                 ? "active"
                                 : ""}`}
-
-                            // to={`/menu-bar/${(title.id)}`}
-                            // className={`nav-link ${location.pathname === `/menu-bar/${(title.id)}`
-                            //   ? "active"
-                            //   : ""}`}
                             >
                               {title.title}
-                              {/* {title.id} */}
                             </Link>
 
                             {title.subMenu && title.subMenu.length > 0 && (
-                              // {id.subMenu && id.subMenu.length > 0 && (
-
                               <div
                                 class={`collapse ${location.pathname === `/menu-bar/${encodeURIComponent(title.title)}`
-                                  // class={`collapse ${location.pathname === `/menu-bar/${title.id}`
                                   ? "show"
                                   : ""
                                   }`}
@@ -624,24 +712,16 @@ export default function SideBar() {
                               >
                                 <ul className="nav sub-menu">
                                   <Link
-                                    to="/menu-bar/${encodeURIComponent(title.title)}"
-                                    className={`nav-link ${location.pathname === `/menu-bar/${encodeURIComponent(title.title)}`
-                                      // to="/menu-bar/${title.id}"
-                                      // className={`nav-link ${location.pathname === `/menu-bar/${title.id}`
-                                      ? "active"
-                                      : ""
-                                      }`}
+                                    to={`/menu-bar/${encodeURIComponent(title.title)}/sub-title`}
+                                    className={`nav-link ${location.pathname === `/menu-bar/${encodeURIComponent(title.title)}/sub-title` ? "active" : ""}`}
                                   >
-                                    Menu Title
+                                    Sub Title
                                   </Link>
 
                                   <ul className="nav sub-menu">
                                     {title.subMenu.map((subTitle) => (
                                       <li className="nav-item" key={subTitle.title}>
                                         <Link
-
-                                          // to={`/menu-bar/${title.id}/${subTitle.title}`}
-                                          // className={`nav-link ${location.pathname === `/menu-bar/${title.id}/${subTitle.title}` ? "active" : ""}`}
                                           to={`/menu-bar/${encodeURIComponent(title.title)}/${encodeURIComponent(subTitle.title)}`}
                                           className={`nav-link ${location.pathname === `/menu-bar/${encodeURIComponent(title.title)}/${encodeURIComponent(subTitle.title)}` ? "active" : ""}`}
                                         >
@@ -664,7 +744,7 @@ export default function SideBar() {
 
                   </div>
 
-                </li>
+                </li> */}
 
                 <li
                   class={`nav-item ${location.pathname === "/zilla-police-pages" ||

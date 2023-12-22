@@ -52,9 +52,16 @@ const visitorCounterRouter = require('./routes/visitorCounter.route');
 const importantLinksRouter = require('./routes/importantLinks.route');
 const rightOthersRouter = require('./routes/rightSidebarOthers.route');
 
-const menuItemRouter = require('./routes/menuItem.route')
+// const menuItemRouter = require('./routes/menuItem.route')
 const menuBarRouter = require('./routes/menuBar.route');
 const rightSideRouter = require('./routes/rightSide.route');
+
+
+const titleRouter = require('./routes/title.route');
+const subTitleRouter = require('./routes/subTitle.route');
+const subTitlePagesRouter = require('./routes/subTitlePages.route');
+const subTitleSubPagesRouter = require('./routes/subTitleSubPages.route');
+const subSequenceRouter = require('./routes/subSequence.route');
 
 const footerButtonLinkRouter = require('./routes/footerButtonLinks.route');
 const contactRouter = require('./routes/contactAddress.route');
@@ -106,9 +113,15 @@ app.use(visitorCounterRouter);
 app.use(importantLinksRouter);
 app.use(rightOthersRouter);
 
-app.use(menuItemRouter);
+// app.use(menuItemRouter);
 app.use(menuBarRouter);
 app.use(rightSideRouter);
+
+app.use(titleRouter);
+app.use(subTitleRouter);
+app.use(subTitlePagesRouter);
+app.use(subTitleSubPagesRouter);
+app.use(subSequenceRouter);
 
 app.use(footerButtonLinkRouter);
 app.use(contactRouter);
