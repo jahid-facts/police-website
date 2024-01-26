@@ -203,7 +203,7 @@ export default function SubTitlePages({ subtitleId }) {
         {
             title: "Title",
             render: (row) => (
-                <div>{row?.title?.title}</div>
+                <div>{row?.subtitle?.title}</div>
             ),
             cellStyle: {
                 textAlign: "center",

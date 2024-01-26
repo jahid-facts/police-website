@@ -108,7 +108,7 @@ export default function SubTitleSubPages({ pagesId }) {
             title: "Area",
             field: `title`,
             render: (row) => (
-                <div>{row?.thana?.title}</div>
+                <div>{row?.pages?.title}</div>
             ),
             cellStyle: {
                 textAlign: "center",

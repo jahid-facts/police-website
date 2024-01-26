@@ -164,6 +164,8 @@ const LeftHomePage = () => {
         axios.get(`right-side-others`)
             .then(res => setRightOthers(res.data))
 
+        
+
         // axios.get(`right-links`)
         //     .then(res => setDynamicTitle(res.data.title))
     }, []);
@@ -177,16 +179,16 @@ const LeftHomePage = () => {
                 const data = await response.json();
                 console.log(response)
                 console.log(data)
-               
+
                 setDynamicTitle(data[0].title); // Assuming your API returns an object with a 'title' property
-               
+
             } catch (error) {
                 console.error('Error fetching title:', error);
             }
         };
 
         fetchData();
-       
+
     }, []);
 
     return (
@@ -253,7 +255,7 @@ const LeftHomePage = () => {
                         {/* <div className="fb__page">
                             <iframe src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/Kdistrictpolice%2Ffacebook&tabs=timeline&width=270&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="100%" height="500" style={{ border: "none", overflow: "hidden", }} scrolling="no" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                         </div> */}
-                         <div className="fb__page">
+                        <div className="fb__page">
                             <iframe src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/Kdistrictpolice%2Ffacebook&tabs=timeline&width=336&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="100%" height="500" style={{ border: "none", overflow: "hidden", minWidth: "100%", width: "100%", }} scrolling="no" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                         </div>
                     </div>

@@ -22,6 +22,7 @@ exports.getSubtitleSubpages = async (req, res) => {
     try {
         const subtitleSubpages = await prisma.Subtitle_Subpages.findMany({
             include: {
+                pages: true,
                 subsequence: true
             }
         });
@@ -39,6 +40,7 @@ exports.getSingleSubtitleSubpage = async (req, res) => {
                 id: Number(req.params.id),
             },
             include: {
+
                 subsequence: true
             }
         });
@@ -153,8 +155,10 @@ exports.updateSubtitleSubpage = async (req, res) => {
                     // content,
                 },
                 include: {
-                    subsequence: true
-                }
+                    // pages: true,
+                    subsequence: true,
+                    
+                },
             });
 
             res.json(updatedSubtitleSubpage);

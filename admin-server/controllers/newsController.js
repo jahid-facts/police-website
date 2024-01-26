@@ -56,13 +56,15 @@ exports.saveNews = async (req, res) => {
 
     const { content, title } = req.body;
     const file = req?.file?.filename ? req?.file?.filename : null;
+    // const file = req?.file;
 
     try {
       const notice = await prisma.Latest_News.create({
         data: {
           content,
           title,
-          file,
+          file
+          // file: file.filename
         },
       });
       res.json(notice);

@@ -203,7 +203,7 @@ export default function SubTitle({ titleId }) {
         {
             title: "Title",
             render: (row) => (
-                <div>{row?.title?.title}</div>
+                <div>{row?.titles?.title}</div>
             ),
             cellStyle: {
                 textAlign: "center",

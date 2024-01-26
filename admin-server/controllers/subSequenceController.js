@@ -21,7 +21,12 @@ const upload = multer({
 
 // Get all Subsequences
 exports.getSubsequences = async (req, res) => {
-    const subsequences = await prisma.Subsequence.findMany();
+    const subsequences = await prisma.Subsequence.findMany({
+        include: {
+            // pages: true,
+            subpages: true
+        }
+    });
     res.json(subsequences);
 }
 
