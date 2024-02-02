@@ -965,100 +965,100 @@ export default MegaMenu;
 // // import { MenuItems } from './MenuItems';
 
 
-// // const MenuItems = [
-// //     {
-// //         name: 'প্রথম পাতা',
-// //         link: '/',
-// //         bg_color: '#999',
-// //         color: '#fff',
-// //         mega_menu: false,
-// //     },
-// //     {
-// //         name: 'জেলা পুলিশ',
-// //         link: '#',
-// //         icon: "",
-// //         mega_menu: false,
-// //         subMenu: [
-// //             {
-// //                 name: 'ভৌগলিক পরিচিতি',
-// //                 link: 'geographical-familiarity',
-// //                 icon: "",
-// //             },
-// //             {
-// //                 name: 'জেলা পুলিশের ইতিহাস',
-// //                 link: 'history-of-district-police',
-// //                 icon: "",
-// //             },
-// //             {
-// //                 name: 'জেলার ম্যাপ',
-// //                 link: 'district-map',
-// //                 icon: "",
-// //             },
-// //             {
-// //                 name: 'আমাদের লক্ষ্য ও উদ্দেশ্য',
-// //                 link: 'our-aims-and-objectives',
-// //                 icon: "",
-// //             },
-// //             {
-// //                 name: 'সাংগঠনিক কাঠামো',
-// //                 link: 'organizational-structure',
-// //                 icon: "",
-// //             },
-// //             {
-// //                 name: 'এক নজরে জেলা পুলিশ',
-// //                 link: 'district-police-at-glance',
-// //                 icon: "",
-// //             },
-// //             {
-// //                 name: 'জেলার দর্শনীয় স্থানসমূহ',
-// //                 link: 'sightseeing-places-district',
-// //                 icon: "",
-// //                 bg_color: '#fff',
-// //                 color: '#000',
-// //             },
-// //             {
-// //                 name: 'নাগরিক সেবা',
-// //                 link: 'civil-service',
-// //                 icon: "",
-// //             },
-// //             {
-// //                 name: 'ডিও সংক্রান্ত',
-// //                 link: 'do-regarding',
-// //                 icon: "",
-// //             },
-// //             {
-// //                 name: 'তথ্য র্কমর্কতার নাম',
-// //                 link: 'name-of-information-officer',
-// //                 icon: "",
-// //             },
-// //             {
-// //                 name: 'ই-সিটিজেন',
-// //                 link: '#',
-// //                 icon: "",
-// //                 subMenu: [
-// //                     {
-// //                         id: 1,
-// //                         name: 'আইন ও বিধি',
-// //                         link: 'laws-and-regulations',
-// //                         icon: "",
-// //                     },
-// //                     {
-// //                         id: 2,
-// //                         name: 'তথ্য অধিকার',
-// //                         link: 'right-to-information',
-// //                         icon: "",
-// //                     },
-// //                 ],
-// //                 position: "absolute",
-// //                 right: "8px",
-// //                 content: "\f0d7",
-// //                 float: "right",
-// //                 border: "none",
-// //                 font_family: 'FontAwesome',
-// //             },
-// //         ],
-// //     },
-// // ];
+// const MenuItems = [
+//     {
+//         name: 'প্রথম পাতা',
+//         link: '/',
+//         bg_color: '#999',
+//         color: '#fff',
+//         mega_menu: false,
+//     },
+//     {
+//         name: 'জেলা পুলিশ',
+//         link: '#',
+//         icon: "",
+//         mega_menu: false,
+//         subMenu: [
+//             {
+//                 name: 'ভৌগলিক পরিচিতি',
+//                 link: 'geographical-familiarity',
+//                 icon: "",
+//             },
+//             {
+//                 name: 'জেলা পুলিশের ইতিহাস',
+//                 link: 'history-of-district-police',
+//                 icon: "",
+//             },
+//             {
+//                 name: 'জেলার ম্যাপ',
+//                 link: 'district-map',
+//                 icon: "",
+//             },
+//             {
+//                 name: 'আমাদের লক্ষ্য ও উদ্দেশ্য',
+//                 link: 'our-aims-and-objectives',
+//                 icon: "",
+//             },
+//             {
+//                 name: 'সাংগঠনিক কাঠামো',
+//                 link: 'organizational-structure',
+//                 icon: "",
+//             },
+//             {
+//                 name: 'এক নজরে জেলা পুলিশ',
+//                 link: 'district-police-at-glance',
+//                 icon: "",
+//             },
+//             {
+//                 name: 'জেলার দর্শনীয় স্থানসমূহ',
+//                 link: 'sightseeing-places-district',
+//                 icon: "",
+//                 bg_color: '#fff',
+//                 color: '#000',
+//             },
+//             {
+//                 name: 'নাগরিক সেবা',
+//                 link: 'civil-service',
+//                 icon: "",
+//             },
+//             {
+//                 name: 'ডিও সংক্রান্ত',
+//                 link: 'do-regarding',
+//                 icon: "",
+//             },
+//             {
+//                 name: 'তথ্য র্কমর্কতার নাম',
+//                 link: 'name-of-information-officer',
+//                 icon: "",
+//             },
+//             {
+//                 name: 'ই-সিটিজেন',
+//                 link: '#',
+//                 icon: "",
+//                 subMenu: [
+//                     {
+//                         id: 1,
+//                         name: 'আইন ও বিধি',
+//                         link: 'laws-and-regulations',
+//                         icon: "",
+//                     },
+//                     {
+//                         id: 2,
+//                         name: 'তথ্য অধিকার',
+//                         link: 'right-to-information',
+//                         icon: "",
+//                     },
+//                 ],
+//                 position: "absolute",
+//                 right: "8px",
+//                 content: "\f0d7",
+//                 float: "right",
+//                 border: "none",
+//                 font_family: 'FontAwesome',
+//             },
+//         ],
+//     },
+// ];
 
 
 // ///// bangla data
