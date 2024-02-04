@@ -144,7 +144,7 @@
   margin-bottom: 0px !important;
   font-size: 14px;
   font-weight: 400;
-  color: #8b8d8f !important;
+  color: #ada9a9 !important;
 }
 
 .navbar__collapse .menu3 .dropdown-item.active,
@@ -300,6 +300,7 @@
   font-weight: 500 !important;
   border-right: 1px solid #8b8d8f;
   margin-right: 0px !important;
+  color: #272727;
 }
 
 .navbar-dark .navbar-toggler {

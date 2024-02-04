@@ -244,11 +244,11 @@ const Auth = () => {
                                 <Route path="/bit-news" element={<BitPolicingNews />} />
 
 
-                                {/* <Route path="/menu-title" element={<Title />} />
+                                <Route path="/menu-title" element={<Title />} />
                                 <Route path="/menu-sub-title" element={<SubTitle />} />
                                 <Route path="/menu-sub-title-pages" element={<SubTitlePages />} />
                                 <Route path="/menu-sub-title-sub-pages" element={<SubTitleSubPages />} />
-                                <Route path="/menu-sub-sequences" element={<SubSequence />} /> */}
+                                <Route path="/menu-sub-sequences" element={<SubSequence />} />
 
 
                                 <Route path="/menu-bar-title" element={<MenuBar />} />

@@ -553,7 +553,7 @@ export default function SideBar() {
               <>
 
 
-                {/* <li
+                <li
                   class={`nav-item ${location.pathname === "/menu-title" ||
                     location.pathname === "/menu-sub-title" || location.pathname === "/menu-sub-title-pages"
                     || location.pathname === "/menu-sub-title-sub-pages" || location.pathname === "/menu-sub-sequences"
@@ -646,7 +646,7 @@ export default function SideBar() {
                       </li>
                     </ul>
                   </div>
-                </li> */}
+                </li>
 
 
 
